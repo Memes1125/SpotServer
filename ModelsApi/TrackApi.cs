@@ -14,6 +14,9 @@ namespace ModelsApi
         public string Name { get; set; }
         public byte[] Image { get; set; }
 
-        public AlbumApi Album { get; set; }
+        public IEnumerable<AlbumTrackApi> AlbumTracks { get; set; }
+        public IEnumerable<ArtistsTrakApi> ArtistsTraks { get; set; }
+        public IEnumerable<LikesTrackApi> LikesTracks { get; set; }
+        public IEnumerable<TrackHistoryApi> TrackHistories { get; set; }
     }
 }

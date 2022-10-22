@@ -11,10 +11,10 @@ namespace ModelsApi
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int? IdHistory { get; set; }
-        public int? IdAlbums { get; set; }
         public byte[] Image { get; set; }
 
-        
+
+        public IEnumerable<TrackHistoryApi> TrackHistories { get; set; }
+        public IEnumerable<UserAlbumApi> UserAlbums { get; set; }
     }
 }

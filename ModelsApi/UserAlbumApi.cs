@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ModelsApi
 {
-    public class LikesTrackApi : ApiBaseType
+    public class UserAlbumApi : ApiBaseType
     {
-        public int IdTrack { get; set; }
         public int IdUser { get; set; }
+        public int IdAlbum { get; set; }
     }
 }

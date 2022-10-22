@@ -13,8 +13,6 @@ namespace SpotifyServer.db
             {
                 Id = user.Id,
                 Email = user.Email,
-                IdAlbums = user.IdAlbums,
-                IdHistory = user.IdHistory,
                 Image = user.Image,
                 Name = user.Name,
                 Password = user.Password,
@@ -29,8 +27,6 @@ namespace SpotifyServer.db
             {
                 Id = user.Id,
                 Email = user.Email,
-                IdAlbums = user.IdAlbums,
-                IdHistory = user.IdHistory,
                 Image = user.Image,
                 Name = user.Name,
                 Password = user.Password

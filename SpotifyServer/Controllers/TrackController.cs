@@ -19,7 +19,20 @@ namespace SpotifyServer.Controllers
         [HttpGet]
         public IEnumerable<TrackApi> Get()
         {
-            return db.Tracks.ToList().Select(s => (TrackApi)s);
+            var albumTracks = db.AlbumTracks.ToList();
+            var artistsTraks = db.ArtistsTraks.ToList();
+            var likesTracks = db.LikesTracks.ToList();
+            var trackHistories = db.TrackHistories.ToList();
+            return db.Tracks.ToList().
+                 Select(s =>
+                 {
+                     var result = (TrackApi)s;
+                     result.TrackHistories = trackHistories.Where(a => a.IdTrack == s.Id).Select(a => (TrackHistoryApi)a);
+                     result.AlbumTracks = albumTracks.Where(a => a.IdTrack == s.Id).Select(a => (AlbumTrackApi)a);
+                     result.ArtistsTraks = artistsTraks.Where(a => a.IdTrack == s.Id).Select(a => (ArtistsTrakApi)a);
+                     result.LikesTracks = likesTracks.Where(a => a.IdTrack == s.Id).Select(a => (LikesTrackApi)a);
+                     return result;
+                 });
         }
 
         [HttpGet("{id}")]
@@ -28,6 +41,11 @@ namespace SpotifyServer.Controllers
             var track = await db.Tracks.FindAsync(id);
             if (track == null)
                 return NotFound();
+            var result = (TrackApi)track;
+            result.TrackHistories = db.TrackHistories.Where(s => s.IdTrack == id).Select(a => (TrackHistoryApi)a);
+            result.LikesTracks = db.LikesTracks.Where(a => a.IdTrack == id).Select(a => (LikesTrackApi)a);
+            result.ArtistsTraks = db.ArtistsTraks.Where(a => a.IdTrack == id).Select(a => (ArtistsTrakApi)a);
+            result.AlbumTracks = db.AlbumTracks.Where(a => a.IdTrack == id).Select(a => (AlbumTrackApi)a);
             return Ok(track);
         }
 
@@ -36,6 +54,14 @@ namespace SpotifyServer.Controllers
         {
             var newTrack = (Track)value;
             db.Tracks.Add(newTrack);
+            var trackHistories = value.TrackHistories.Select(s => (TrackHistory)s);
+            await db.TrackHistories.AddRangeAsync(trackHistories);
+            var likesTracks = value.LikesTracks.Select(s => (LikesTrack)s);
+            await db.LikesTracks.AddRangeAsync(likesTracks);
+            var artistsTraks = value.ArtistsTraks.Select(s => (ArtistsTrak)s);
+            await db.ArtistsTraks.AddRangeAsync(artistsTraks);
+            var albumTracks = value.AlbumTracks.Select(s => (AlbumTrack)s);
+            await db.AlbumTracks.AddRangeAsync(albumTracks);
             await db.SaveChangesAsync();
             return Ok(newTrack.Id);
         }

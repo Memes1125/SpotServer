@@ -8,7 +8,7 @@ namespace ModelsApi
 {
     public class LikesAlbumApi : ApiBaseType
     {
-        public int? IdAlbum { get; set; }
-        public int? IdUser { get; set; }
+        public int IdAlbum { get; set; }
+        public int IdUser { get; set; }
     }
 }

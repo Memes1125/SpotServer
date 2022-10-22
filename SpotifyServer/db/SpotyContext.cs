@@ -18,6 +18,7 @@ namespace SpotifyServer.db
         }
 
         public virtual DbSet<Album> Albums { get; set; }
+        public virtual DbSet<AlbumTrack> AlbumTracks { get; set; }
         public virtual DbSet<AlbumsArtist> AlbumsArtists { get; set; }
         public virtual DbSet<Artist> Artists { get; set; }
         public virtual DbSet<ArtistsTrak> ArtistsTraks { get; set; }
@@ -25,8 +26,8 @@ namespace SpotifyServer.db
         public virtual DbSet<LikesTrack> LikesTracks { get; set; }
         public virtual DbSet<Track> Tracks { get; set; }
         public virtual DbSet<TrackHistory> TrackHistories { get; set; }
-        public virtual DbSet<TrackLine> TrackLines { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserAlbum> UserAlbums { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,6 +49,21 @@ namespace SpotifyServer.db
                     .HasMaxLength(50);
 
                 entity.Property(e => e.TrackNumber).HasColumnName("Track_number");
+            });
+
+            modelBuilder.Entity<AlbumTrack>(entity =>
+            {
+                entity.HasOne(d => d.IdAlbumNavigation)
+                    .WithMany(p => p.AlbumTracks)
+                    .HasForeignKey(d => d.IdAlbum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AlbumTracks_Albums");
+
+                entity.HasOne(d => d.IdTrackNavigation)
+                    .WithMany(p => p.AlbumTracks)
+                    .HasForeignKey(d => d.IdTrack)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_AlbumTracks_Tracks");
             });
 
             modelBuilder.Entity<AlbumsArtist>(entity =>
@@ -100,11 +116,13 @@ namespace SpotifyServer.db
                 entity.HasOne(d => d.IdAlbumNavigation)
                     .WithMany(p => p.LikesAlbums)
                     .HasForeignKey(d => d.IdAlbum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LikesAlbum_Albums");
 
                 entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.LikesAlbums)
                     .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LikesAlbum_User");
             });
 
@@ -113,20 +131,18 @@ namespace SpotifyServer.db
                 entity.HasOne(d => d.IdTrackNavigation)
                     .WithMany(p => p.LikesTracks)
                     .HasForeignKey(d => d.IdTrack)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LikesTracks_Tracks");
 
                 entity.HasOne(d => d.IdUserNavigation)
                     .WithMany(p => p.LikesTracks)
                     .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LikesTracks_User");
             });
 
             modelBuilder.Entity<Track>(entity =>
             {
-                entity.Property(e => e.IdAlbum).HasColumnName("Id_album");
-
-                entity.Property(e => e.Image).IsRequired();
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -134,12 +150,6 @@ namespace SpotifyServer.db
                 entity.Property(e => e.Track1)
                     .IsRequired()
                     .HasColumnName("Track");
-
-                entity.HasOne(d => d.IdAlbumNavigation)
-                    .WithMany(p => p.Tracks)
-                    .HasForeignKey(d => d.IdAlbum)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Tracks_Albums");
             });
 
             modelBuilder.Entity<TrackHistory>(entity =>
@@ -161,29 +171,12 @@ namespace SpotifyServer.db
                     .HasForeignKey(d => d.IdTrack)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Track_History_Tracks");
-            });
-
-            modelBuilder.Entity<TrackLine>(entity =>
-            {
-                entity.ToTable("TrackLine");
-
-                entity.HasOne(d => d.IdAlbumNavigation)
-                    .WithMany(p => p.TrackLines)
-                    .HasForeignKey(d => d.IdAlbum)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TrackLine_Albums");
-
-                entity.HasOne(d => d.IdTrackNavigation)
-                    .WithMany(p => p.TrackLines)
-                    .HasForeignKey(d => d.IdTrack)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TrackLine_Tracks");
 
                 entity.HasOne(d => d.IdUserNavigation)
-                    .WithMany(p => p.TrackLines)
+                    .WithMany(p => p.TrackHistories)
                     .HasForeignKey(d => d.IdUser)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TrackLine_User");
+                    .HasConstraintName("FK_Track_History_User");
             });
 
             modelBuilder.Entity<User>(entity =>
@@ -192,8 +185,6 @@ namespace SpotifyServer.db
 
                 entity.Property(e => e.Email).IsRequired();
 
-                entity.Property(e => e.IdHistory).HasColumnName("Id_History");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -201,16 +192,21 @@ namespace SpotifyServer.db
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(30);
+            });
 
-                entity.HasOne(d => d.IdAlbumsNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.IdAlbums)
-                    .HasConstraintName("FK_User_Albums");
+            modelBuilder.Entity<UserAlbum>(entity =>
+            {
+                entity.HasOne(d => d.IdAlbumNavigation)
+                    .WithMany(p => p.UserAlbums)
+                    .HasForeignKey(d => d.IdAlbum)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserAlbums_Albums");
 
-                entity.HasOne(d => d.IdHistoryNavigation)
-                    .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.IdHistory)
-                    .HasConstraintName("FK_User_Track_History1");
+                entity.HasOne(d => d.IdUserNavigation)
+                    .WithMany(p => p.UserAlbums)
+                    .HasForeignKey(d => d.IdUser)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserAlbums_User");
             });
 
             OnModelCreatingPartial(modelBuilder);
