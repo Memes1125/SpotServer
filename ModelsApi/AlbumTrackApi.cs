@@ -10,5 +10,8 @@ namespace ModelsApi
     {
         public int IdTrack { get; set; }
         public int IdAlbum { get; set; }
+
+        public AlbumApi album { get; set; }
+        public TrackApi track { get; set; }
     }
 }

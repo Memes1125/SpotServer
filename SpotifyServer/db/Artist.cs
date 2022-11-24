@@ -17,7 +17,7 @@ namespace SpotifyServer.db
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
         public virtual ICollection<AlbumsArtist> AlbumsArtists { get; set; }
         public virtual ICollection<ArtistsTrak> ArtistsTraks { get; set; }

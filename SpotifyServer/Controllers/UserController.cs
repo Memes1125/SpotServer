@@ -19,16 +19,7 @@ namespace SpotifyServer.Controllers
         [HttpGet]
         public IEnumerable<UserApi> Get()
         {
-            var userAlbum = db.UserAlbums.ToList();
-            var trackHistories = db.TrackHistories.ToList();
-            return db.Users.ToList().
-                Select(s =>
-                {
-                    var result = (UserApi)s;
-                    result.TrackHistories = trackHistories.Where(a => a.IdUser == s.Id).Select(a => (TrackHistoryApi)a);
-                    result.UserAlbums = userAlbum.Where(a => a.IdUser == s.Id).Select(a => (UserAlbumApi)a);
-                    return result;
-                });
+            return db.Users.ToList().Select(s =>(UserApi)s);
         }
 
         [HttpGet("{id}")]
@@ -37,9 +28,6 @@ namespace SpotifyServer.Controllers
             var user = await db.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
-            var result = (UserApi)user;
-            result.TrackHistories = db.TrackHistories.Where(s => s.IdUser == id).Select(a => (TrackHistoryApi)a);
-            result.UserAlbums = db.UserAlbums.Where(a => a.IdUser == id).Select(a => (UserAlbumApi)a);
             return Ok();
         }
 
@@ -48,11 +36,6 @@ namespace SpotifyServer.Controllers
         {
             var newUser = (User)value;
             db.Users.Add(newUser);
-            await db.SaveChangesAsync();
-            var trackHistories = value.TrackHistories.Select(s => (TrackHistory)s);
-            await db.TrackHistories.AddRangeAsync(trackHistories);
-            var userAlbum = value.UserAlbums.Select(s => (UserAlbum)s);
-            await db.UserAlbums.AddRangeAsync(userAlbum);
             await db.SaveChangesAsync();
             return Ok(newUser.Id);
         }

@@ -10,5 +10,7 @@ namespace ModelsApi
     {
         public int IdTrack { get; set; }
         public int IdArtist { get; set; }
+
+
     }
 }

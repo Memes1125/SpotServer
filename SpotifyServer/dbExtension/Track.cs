@@ -13,7 +13,6 @@ namespace SpotifyServer.db
             {
                 Id = track.Id,
                 Duration = track.Duration,
-                IdAlbum = track.IdAlbum,
                 Image = track.Image,
                 Name = track.Name,
                 Track1 = track.Track1,
@@ -28,7 +27,6 @@ namespace SpotifyServer.db
             {
                 Id = track.Id,
                 Duration = track.Duration,
-                IdAlbum = track.IdAlbum,
                 Image = track.Image,
                 Name = track.Name,
                 Track1 = track.Track1,

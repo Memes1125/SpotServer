@@ -14,7 +14,7 @@ namespace SpotifyServer.db
                 Id = album.Id,
                 Duration = album.Duration,
                 Name = album.Name,
-                TrackNumber = album.TrackNumber,
+                Image = album.Image
             };
         }
 
@@ -27,7 +27,7 @@ namespace SpotifyServer.db
                 Id = album.Id,
                 Duration = album.Duration,
                 Name = album.Name,
-                TrackNumber = album.TrackNumber,
+                Image = album.Image
             };
         }
     }

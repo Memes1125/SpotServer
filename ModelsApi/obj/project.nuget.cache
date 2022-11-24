@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "HzQ6kz7Bnkb43uOXlBL4gDDPMtQ6vHc+SlQAL16Er742R66iLhv3mW2Vqz02mGsJRnPvua2AtFgXif9W1wSgEw==",
+  "dgSpecHash": "SPeqaztzVXX7DERO1fDjRjmrhtGPgupNOe4vIiFgse8dlYlnXlo6zWmoUiCjFny4iJJETrxIznRYhjoSujZ+sg==",
   "success": true,
   "projectFilePath": "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\ModelsApi\\ModelsApi.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\pokim\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.0\\microsoft.aspnetcore.jsonpatch.6.0.0.nupkg.sha512",
+    "C:\\Users\\pokim\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.0.nupkg.sha512",
+    "C:\\Users\\pokim\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\pokim\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\pokim\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
