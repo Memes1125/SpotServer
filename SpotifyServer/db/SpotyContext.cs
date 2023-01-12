@@ -189,8 +189,6 @@ namespace SpotifyServer.db
 
                 entity.Property(e => e.Email).IsRequired();
 
-                entity.Property(e => e.Image).IsUnicode(false);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);

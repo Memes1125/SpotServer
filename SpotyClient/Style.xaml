@@ -95,4 +95,103 @@
         </Style.Triggers>
     </Style>
 
+
+    <!--Textbox-->
+    <Style x:Key="TextBoxGray" TargetType="TextBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="#595959"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        
+                    <Border Background="{TemplateBinding Background}" 
+                        x:Name="Bd" BorderBrush="Black"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                        <ControlTemplate.Triggers>
+                             <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                </Trigger>
+                             <Trigger Property="Width" Value="Auto">
+                             <Setter Property="MinWidth" Value="100"/>
+                             </Trigger>
+                             <Trigger Property="Height" Value="Auto">
+                             <Setter Property="MinHeight" Value="20"/>
+                             </Trigger>
+                     </ControlTemplate.Triggers>
+                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+
+    
+
+    <!--Passwordbox-->
+    <Style x:Key="PasswordBoxGray" TargetType="PasswordBox">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="250"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="#595959"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border Background="{TemplateBinding Background}" 
+                        x:Name="Bd" BorderBrush="Black"
+                        BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="7" Margin="0 0 0 0">
+                        <ScrollViewer x:Name="PART_ContentHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Кнопка для выбора картинки-->
+    <Style TargetType="Button" x:Key="ButtonForImage">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Width" Value="135"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Border Name="MenuBorder" SnapsToDevicePixels="True"  Background="{TemplateBinding Background}" BorderThickness="0,0,0,2" >
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsFocused" Value="True">
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Button.Click">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                 Storyboard.TargetProperty="FontSize"
+                                 From="12"
+                                 To="11"
+                                 Duration="0:0:0.2"
+                                 FillBehavior="Stop"
+                                />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

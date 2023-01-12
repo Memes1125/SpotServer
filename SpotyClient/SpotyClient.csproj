@@ -16,8 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="bgvs.png" />
-    <None Remove="logo24.png" />
+    <None Remove="Resource\bgvs.png" />
+    <None Remove="Resource\logo24.png" />
+    <None Remove="Resource\NoImage.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,14 @@
   <ItemGroup>
     <Resource Include="Resource\bgvs.png" />
     <Resource Include="Resource\logo24.png" />
+    <Resource Include="Resource\NoImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

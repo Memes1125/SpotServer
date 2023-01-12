@@ -1,3 +1,10 @@
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.csproj.AssemblyReference.cache
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.AssemblyInfoInputs.cache
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.AssemblyInfo.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.csproj.CoreCompileInputs.cache
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\appsettings.json
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\SpotifyServer.exe
@@ -6,6 +13,8 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Spotify
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\SpotifyServer.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\SpotifyServer.pdb
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Humanizer.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
@@ -21,6 +30,7 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microso
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -47,13 +57,8 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\runtime
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.csproj.AssemblyReference.cache
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.AssemblyInfoInputs.cache
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.AssemblyInfo.cs
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.csproj.CoreCompileInputs.cache
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\ModelsApi.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\ModelsApi.pdb
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\staticwebassets.development.json
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\scopedcss\bundle\SpotifyServer.styles.css
@@ -63,8 +68,3 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\refint\
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.pdb
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\SpotifyServer.genruntimeconfig.cache
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\obj\Debug\net6.0\ref\SpotifyServer.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\ModelsApi.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0\ModelsApi.pdb

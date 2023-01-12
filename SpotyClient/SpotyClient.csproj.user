@@ -7,10 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Compile Update="Components\BindablePasswordBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\RegisterArtistWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\RegisterUserWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SingInWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Components\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Style.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\RegisterArtistWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\RegisterUserWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\SingInWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
