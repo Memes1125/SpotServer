@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotyClient.View" 
+        xmlns:convert="clr-namespace:SpotyClient.Components"
         xmlns:components="clr-namespace:SpotyClient.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -77,7 +78,16 @@
             </Grid>
             
         </StackPanel>
-        
-        <Button Content="Зарегистрироваться" Command="{Binding SaveUser}" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}"/>
+
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <Button Width="140" Content="Зарегистрироваться" Command="{Binding SaveUser}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}" Margin="5 0 0 0"/>
+            <Button Width="140" Content="Назад" Command="{Binding Back}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Style="{StaticResource ButtonForImage}"/>
+        </Grid>
     </Grid>
 </Window>

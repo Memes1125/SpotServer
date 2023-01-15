@@ -77,6 +77,15 @@
 
         </StackPanel>
 
-        <Button Content="Зарегистрироваться" Command="{Binding SaveArtist}" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}"/>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Button Width="140" Content="Зарегистрироваться" Command="{Binding SaveArtist}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}" Margin="5 0 0 0"/>
+            <Button Width="140" Content="Назад" Command="{Binding Back}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Style="{StaticResource ButtonForImage}"/>
+        </Grid>
     </Grid>
 </Window>

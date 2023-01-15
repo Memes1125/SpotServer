@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using ModelsApi;
 using SpotyClient.Tools;
+using SpotyClient.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -31,6 +32,7 @@ namespace SpotyClient.ViewModel
         public ArtistApi AddArtist { get; set; }
         public CustomCommand SaveArtist { get; set; }
         public CustomCommand SelectImage { get; set; }
+        public CustomCommand Back { get; set; }
         public string PasswordConfirm { get; set; }
 
 
@@ -99,6 +101,17 @@ namespace SpotyClient.ViewModel
                     }
                 }
 
+            });
+
+            Back = new CustomCommand(() =>
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
             });
         }
 

@@ -10,6 +10,9 @@
     <Compile Update="Components\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\MasterWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\RegisterArtistWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Style.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\MasterWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\RegisterArtistWindow.xaml">

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ModelsApi;
+using SpotyClient.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,13 @@ namespace SpotyClient.View
         public SingInWindow()
         {
             InitializeComponent();
+            DataContext = new SingInWindowViewModel(null);
+        }
+
+        public SingInWindow(UserApi user)
+        {
+            InitializeComponent();
+            DataContext = new SingInWindowViewModel(user);
         }
     }
 }

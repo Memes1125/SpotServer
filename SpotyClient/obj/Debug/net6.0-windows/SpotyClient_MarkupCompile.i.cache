@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\App.xaml
-6443485977
+71628063441
 
-161866959695
+18-1886963948
 195-1386726453
-Components\BindablePasswordBox.xaml;Style.xaml;View\MainWindow.xaml;View\RegisterArtistWindow.xaml;View\RegisterUserWindow.xaml;View\SingInWindow.xaml;
+Components\BindablePasswordBox.xaml;Style.xaml;View\MainWindow.xaml;View\MasterWindow.xaml;View\RegisterArtistWindow.xaml;View\RegisterUserWindow.xaml;View\SingInWindow.xaml;
 
 True
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SpotyClient.ViewModel
 {
@@ -21,20 +22,41 @@ namespace SpotyClient.ViewModel
             RegUser = new CustomCommand(() =>
             {
                 RegisterUserWindow RegUserWin = new RegisterUserWindow();
-                RegUserWin.ShowDialog();
+                RegUserWin.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
             });
 
             RegArtist = new CustomCommand(() =>
             {
                 RegisterArtistWindow RegArtistWin = new RegisterArtistWindow();
-                RegArtistWin.ShowDialog();
+                RegArtistWin.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
             });
 
             SingIn = new CustomCommand(() =>
             {
                 SingInWindow SingInWin = new SingInWindow();
-                SingInWin.ShowDialog();
+                SingInWin.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
             });
+        }
+
+        public void CloseWin(object obj)
+        {
+            Window win = obj as Window;
+            win.Close();
         }
     }
 }

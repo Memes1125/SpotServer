@@ -2,6 +2,7 @@
 using ModelsApi;
 using SpotyClient.Components;
 using SpotyClient.Tools;
+using SpotyClient.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,22 +27,21 @@ namespace SpotyClient.ViewModel
             set
             {
                 image = value;
-                SignalChanged();
+                SignalChanged("Image");
             }
         }
-
-
 
         public List<UserApi> users { get; set; }
         public UserApi AddUser { get; set; }
         public CustomCommand SaveUser { get; set; }
         public CustomCommand SelectImage { get; set; }
+        public CustomCommand Back { get; set; }
         public string PasswordConfirm { get; set; }
 
 
         public RegisterUserWindowViewModel(UserApi user)
         {
-            string directory = Environment.CurrentDirectory;
+            
             Task.Run(GetListUsers);
             if (user == null)
             {
@@ -90,14 +90,32 @@ namespace SpotyClient.ViewModel
                 {
                     try
                     {
+                        var info = new FileInfo(ofd.FileName);
                         Image = LoadImage(ofd.FileName);
-                        //var newPath = directory.Substring(0, directory.Length - 25) + AddUser.Image;
-                        //File.Copy(ofd.FileName, newPath);
+                        AddUser.Image = $@"\Resource\{info.Name}";
+                        string directory = Environment.CurrentDirectory;
+                        var newPath = directory.Substring(0, directory.Length) + AddUser.Image;
+                        if (!File.Exists(newPath))
+                            File.Copy(ofd.FileName, newPath);
+                        else
+                            File.Create(newPath);
+
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Код ошибки: Image Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error); 
                     }
+                }
+            });
+
+            Back = new CustomCommand(() =>
+            {
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
                 }
             });
         }
@@ -111,19 +129,13 @@ namespace SpotyClient.ViewModel
                 img.BeginInit();
                 img.CacheOption = BitmapCacheOption.OnLoad;
                 img.StreamSource = stream;
-                //img.UriSource = new Uri(url, UriKind.Absolute);
+                img.UriSource = new Uri(url, UriKind.Absolute);
+                stream.Close();
                 img.EndInit();
             }
             return img;
         }
-
-        
-
-
         #endregion
-
-
-
 
         public void CloseWin(object obj)
         {

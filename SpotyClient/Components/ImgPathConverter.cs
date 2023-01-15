@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
 
@@ -16,7 +12,7 @@ namespace SpotyClient.Components
         {
             string path = Environment.CurrentDirectory + value.ToString();
             if (!File.Exists(path))
-                path = Environment.CurrentDirectory + @"\Resource\IMG_20210413_180100_224.jpg";
+                path = Environment.CurrentDirectory + @"\Resource\NoImage.png";
             return GetImageFromPath(path);
         }
 
