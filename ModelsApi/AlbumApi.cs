@@ -10,7 +10,7 @@ namespace ModelsApi
     {   
         public string Name { get; set; }
         public TimeSpan Duration { get; set; } 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
         
         
     }

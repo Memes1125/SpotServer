@@ -44,7 +44,7 @@ namespace SpotyClient.ViewModel
 
             if (artist == null)
             {
-                AddArtist = new ArtistApi { Image = "./Resource/IMG_20210413_180100_224.jpg" };
+                AddArtist = new ArtistApi();
             }
             else
             {
@@ -91,7 +91,7 @@ namespace SpotyClient.ViewModel
                     {
                         var info = new FileInfo(ofd.FileName);
                         Image = LoadImage(ofd.FileName);
-                        AddArtist.Image = @$"\Resource\{info.Name}";
+                        //AddArtist.Image = @$"\Resource\{info.Name}";
                         //var newPath = directory.Substring(0, directory.Length - 25) + AddUser.Image;
                         //File.Copy(ofd.FileName, newPath);
                     }

@@ -20,14 +20,25 @@ namespace SpotyClient.ViewModel
 {
     public class RegisterUserWindowViewModel : Notify
     {
-        private ImageSource image;
-        public ImageSource Image
+        private byte[] imageByte;
+        public byte[] ImageByte
         {
-            get => image;
+            get => imageByte;
             set
             {
-                image = value;
-                SignalChanged("Image");
+                imageByte = value;
+                SignalChanged();
+            }
+        }
+
+        private byte[] imageBitMap;
+        public byte[] ImageBitMap
+        {
+            get => imageBitMap;
+            set
+            {
+                imageBitMap = value;
+                SignalChanged("ImageBitMap");
             }
         }
 
@@ -41,7 +52,7 @@ namespace SpotyClient.ViewModel
 
         public RegisterUserWindowViewModel(UserApi user)
         {
-            
+            OpenFileDialog ofd = new OpenFileDialog();
             Task.Run(GetListUsers);
             if (user == null)
             {
@@ -58,7 +69,6 @@ namespace SpotyClient.ViewModel
                     Image = user.Image
                 };
             }
-
             SaveUser = new CustomCommand(() =>
             {
                 if (AddUser.Password == PasswordConfirm)
@@ -72,6 +82,9 @@ namespace SpotyClient.ViewModel
                     else
                         Task.Run(EditUsers);
 
+                    MainWindow mw = new MainWindow();
+                    mw.Show();
+
                     foreach (Window window in Application.Current.Windows)
                     {
                         if (window.DataContext == this)
@@ -81,29 +94,26 @@ namespace SpotyClient.ViewModel
                 else
                     MessageBox.Show("Чёт с паролем не так");
             });
-
+            
             SelectImage = new CustomCommand(() =>
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-
-                if (ofd.ShowDialog() == true)
+                
+                var res = ofd.ShowDialog();
+                if (res == true)
                 {
                     try
                     {
-                        var info = new FileInfo(ofd.FileName);
-                        Image = LoadImage(ofd.FileName);
-                        AddUser.Image = $@"\Resource\{info.Name}";
-                        string directory = Environment.CurrentDirectory;
-                        var newPath = directory.Substring(0, directory.Length) + AddUser.Image;
-                        if (!File.Exists(newPath))
-                            File.Copy(ofd.FileName, newPath);
-                        else
-                            File.Create(newPath);
+                        
+                        //ImageBitMap = new BitmapImage(new Uri(ofd.FileName));
+                        ImageBitMap = ConvertBitmapSourceToByteArray(new BitmapImage(new Uri(ofd.FileName)));
+                            
+                        //ImageBitMap = LoadImage(t);
 
+                        
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Код ошибки: Image Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error); 
+                        MessageBox.Show("Код ошибки: Image Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             });
@@ -121,20 +131,64 @@ namespace SpotyClient.ViewModel
         }
 
         #region
-        public static ImageSource LoadImage(string url)
+        //public static ImageSource LoadImage(string url)
+        //{
+        //    var img = new BitmapImage();
+        //    using (var stream = new FileStream(url, FileMode.Open))
+        //    {
+        //        img.BeginInit();
+        //        img.CacheOption = BitmapCacheOption.OnLoad;
+        //        img.StreamSource = stream;
+        //        img.UriSource = new Uri(url, UriKind.Absolute);
+        //        stream.Close();
+        //        img.EndInit();
+        //    }
+        //    return img;
+        //}
+
+        public byte[] getJPGFromImageControl(BitmapImage imageC)
         {
-            var img = new BitmapImage();
-            using (var stream = new FileStream(url, FileMode.Open))
-            {
-                img.BeginInit();
-                img.CacheOption = BitmapCacheOption.OnLoad;
-                img.StreamSource = stream;
-                img.UriSource = new Uri(url, UriKind.Absolute);
-                stream.Close();
-                img.EndInit();
-            }
-            return img;
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(imageC));
+            encoder.Save(memStream);
+            return memStream.ToArray();
         }
+
+        public static byte[] ConvertBitmapSourceToByteArray(BitmapSource image)
+        {
+            byte[] data;
+            BitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(image));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
+        }
+
+
+        private static BitmapImage LoadImage(byte[] imageData)
+        {
+            if (imageData == null || imageData.Length == 0) return null;
+            var image = new BitmapImage();
+            using (var mem = new MemoryStream(imageData))
+            {
+                mem.Position = 0;
+                image.BeginInit();
+                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = null;
+                image.StreamSource = mem;
+                image.EndInit();
+            }
+            image.Freeze();
+            return image;
+        }
+
+
+
         #endregion
 
         public void CloseWin(object obj)

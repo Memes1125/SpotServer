@@ -44,8 +44,6 @@ namespace SpotifyServer.db
 
             modelBuilder.Entity<Album>(entity =>
             {
-                entity.Property(e => e.Image).IsUnicode(false);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -84,8 +82,6 @@ namespace SpotifyServer.db
             modelBuilder.Entity<Artist>(entity =>
             {
                 entity.Property(e => e.Email).IsRequired();
-
-                entity.Property(e => e.Image).IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -145,8 +141,6 @@ namespace SpotifyServer.db
 
             modelBuilder.Entity<Track>(entity =>
             {
-                entity.Property(e => e.Image).IsUnicode(false);
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -188,8 +182,6 @@ namespace SpotifyServer.db
                 entity.ToTable("User");
 
                 entity.Property(e => e.Email).IsRequired();
-
-                entity.Property(e => e.Image).IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
