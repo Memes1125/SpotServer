@@ -5,8 +5,146 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotyClient.View"
         mc:Ignorable="d"
-        Title="MasterWindow" Height="450" Width="800">
+        Title="MasterWindow" Height="650" Width="1200"
+        MinWidth="600" MinHeight="500">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="Black">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Image Height="150" Width="150" Source="/Resource/logo24.png"/> <!--сделать белой--> 
+
+            <Grid Grid.Row="1" Margin="0 15 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Height="25" Width="25" Source="/Resource/home.png" Margin="5 0 5 0"/>
+                <Button Grid.Column="1" Content="Главная" Style="{StaticResource TransponentButtonWin}" />
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="0 15 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Height="25" Width="25" Source="/Resource/magnifier.png" Margin="5 0 5 0"/>
+                <Button Grid.Column="1" Content="Поиск" Style="{StaticResource TransponentButtonWin}"/>
+            </Grid>
+
+            <Grid Grid.Row="3" Margin="0 15 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Height="25" Width="25" Source="/Resource/books.png" Margin="5 0 5 0"/>
+                <Button Grid.Column="1" Content="Моя медиатека" Style="{StaticResource TransponentButtonWin}"/>
+            </Grid>
+
+            <Grid Grid.Row="4" Margin="0 15 0 10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Height="25" Width="25" Source="/Resource/question.png" Margin="5 0 5 0"/> 
+                <Button Grid.Column="1" Content="Help" Style="{StaticResource TransponentButtonWin}"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.RowSpan="1" Grid.ColumnSpan="2" Background="#242423">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="75" Width="auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="75"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Image Height="50" Width="50" Margin="15 0 15 0"/>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Name Track" Style="{StaticResource NameTrack}" VerticalAlignment="Bottom" />
+                    <Label Grid.Row="1" Content="Исполнители" VerticalAlignment="Bottom"/>
+                </Grid>
+                <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Margin="5 0 5 0">
+                    <Image Source="/Resource/heart.png"/>
+                </Button>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Style="{StaticResource ButtonImage}" HorizontalAlignment="Right" Margin="5 0 5 5">
+                        <Image Source="/Resource/back.png"/>
+                    </Button>
+                    <Button  Grid.Column="1" Style="{StaticResource ButtonImage}">
+                        <Image Source="/Resource/start.png"/>
+                    </Button>
+                    <Button  Grid.Column="2" Style="{StaticResource ButtonImage}" HorizontalAlignment="Left" Margin="5 0 5 5">
+                        <Image Source="/Resource/next.png"/>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="00:00" HorizontalAlignment="Right" Margin="0 5 5 0"/>
+                    <Slider Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label Grid.Column="2" Content="00:00" Margin="5 5 0 0"/>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Height="30" Width="30" HorizontalAlignment="Right" Margin="10 0 10 0" Source="/Resource/sounds.png"/>
+                <Slider Grid.Column="1" Width="150" VerticalAlignment="Center"/>
+            </Grid>
+            
+            <Frame NavigationUIVisibility="Hidden" />
+        </Grid>
+        <Frame Grid.Column="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

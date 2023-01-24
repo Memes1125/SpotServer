@@ -17,14 +17,14 @@ namespace SpotyClient.ViewModel
 {
     public class RegisterArtistWindowViewModel : Notify
     {
-        private ImageSource image;
-        public ImageSource Image
+        private BitmapImage image;
+        public BitmapImage Image
         {
             get => image;
             set
             {
                 image = value;
-                SignalChanged();
+                SignalChanged("Image");
             }
         }
 
@@ -39,7 +39,6 @@ namespace SpotyClient.ViewModel
 
         public RegisterArtistWindowViewModel(ArtistApi artist)
         {
-            string directory = Environment.CurrentDirectory;
             Task.Run(GetListArtists);
 
             if (artist == null)
@@ -71,16 +70,12 @@ namespace SpotyClient.ViewModel
                     else
                         Task.Run(EditArtists);
 
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        if (window.DataContext == this)
-                            CloseWin(window);
-                    }
+                    BackWindow();
                 }
                 else
                     MessageBox.Show("Чёт с паролем не так");
             });
-
+            string directory = Environment.CurrentDirectory;
             SelectImage = new CustomCommand(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
@@ -90,10 +85,11 @@ namespace SpotyClient.ViewModel
                     try
                     {
                         var info = new FileInfo(ofd.FileName);
-                        Image = LoadImage(ofd.FileName);
-                        //AddArtist.Image = @$"\Resource\{info.Name}";
-                        //var newPath = directory.Substring(0, directory.Length - 25) + AddUser.Image;
-                        //File.Copy(ofd.FileName, newPath);
+                        Image = GetImageFromPath(ofd.FileName);
+                        AddArtist.Image = $"/Resource/{info.Name}";
+                        var newPath = directory.Substring(0, directory.Length) + AddArtist.Image;
+                        if (!File.Exists(newPath))
+                            File.Copy(ofd.FileName, newPath, true);
                     }
                     catch (Exception)
                     {
@@ -105,30 +101,32 @@ namespace SpotyClient.ViewModel
 
             Back = new CustomCommand(() =>
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window.DataContext == this)
-                        CloseWin(window);
-                }
+                BackWindow();
             });
         }
 
 
-        public static ImageSource LoadImage(string url)
+        private BitmapImage GetImageFromPath(string url)
         {
-            var img = new BitmapImage();
-            using (var stream = new FileStream(url, FileMode.Open))
-            {
-                img.BeginInit();
-                img.CacheOption = BitmapCacheOption.OnLoad;
-                img.StreamSource = stream;
-                //img.UriSource = new Uri(url, UriKind.Absolute);
-                img.EndInit();
-            }
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.UriSource = new Uri(url, UriKind.Absolute);
+            img.EndInit();
             return img;
         }
+
+        public void BackWindow()
+        {
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.DataContext == this)
+                    CloseWin(window);
+            }
+        }
+
 
         public void CloseWin(object obj)
         {

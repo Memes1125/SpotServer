@@ -20,19 +20,9 @@ namespace SpotyClient.ViewModel
 {
     public class RegisterUserWindowViewModel : Notify
     {
-        private byte[] imageByte;
-        public byte[] ImageByte
-        {
-            get => imageByte;
-            set
-            {
-                imageByte = value;
-                SignalChanged();
-            }
-        }
 
-        private byte[] imageBitMap;
-        public byte[] ImageBitMap
+        private BitmapImage imageBitMap;
+        public BitmapImage ImageBitMap
         {
             get => imageBitMap;
             set
@@ -49,10 +39,9 @@ namespace SpotyClient.ViewModel
         public CustomCommand Back { get; set; }
         public string PasswordConfirm { get; set; }
 
-
         public RegisterUserWindowViewModel(UserApi user)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
+            
             Task.Run(GetListUsers);
             if (user == null)
             {
@@ -69,6 +58,8 @@ namespace SpotyClient.ViewModel
                     Image = user.Image
                 };
             }
+            
+
             SaveUser = new CustomCommand(() =>
             {
                 if (AddUser.Password == PasswordConfirm)
@@ -82,34 +73,26 @@ namespace SpotyClient.ViewModel
                     else
                         Task.Run(EditUsers);
 
-                    MainWindow mw = new MainWindow();
-                    mw.Show();
-
-                    foreach (Window window in Application.Current.Windows)
-                    {
-                        if (window.DataContext == this)
-                            CloseWin(window);
-                    }
+                    BackWindow();
                 }
                 else
                     MessageBox.Show("Чёт с паролем не так");
             });
-            
+
+            string directory = Environment.CurrentDirectory;
             SelectImage = new CustomCommand(() =>
             {
-                
-                var res = ofd.ShowDialog();
-                if (res == true)
+                OpenFileDialog ofd = new OpenFileDialog();
+                if (ofd.ShowDialog() == true)
                 {
                     try
                     {
-                        
-                        //ImageBitMap = new BitmapImage(new Uri(ofd.FileName));
-                        ImageBitMap = ConvertBitmapSourceToByteArray(new BitmapImage(new Uri(ofd.FileName)));
-                            
-                        //ImageBitMap = LoadImage(t);
-
-                        
+                        var info = new FileInfo(ofd.FileName);
+                        ImageBitMap = GetImageFromPath(ofd.FileName);
+                        AddUser.Image = $"/Resource/{info.Name}";
+                        var newPath = directory.Substring(0, directory.Length ) + AddUser.Image;
+                        if(!File.Exists(newPath))
+                            File.Copy(ofd.FileName, newPath, true);
                     }
                     catch (Exception)
                     {
@@ -120,76 +103,30 @@ namespace SpotyClient.ViewModel
 
             Back = new CustomCommand(() =>
             {
-                MainWindow mw = new MainWindow();
-                mw.Show();
-                foreach (Window window in Application.Current.Windows)
-                {
-                    if (window.DataContext == this)
-                        CloseWin(window);
-                }
+                BackWindow();
             });
         }
 
-        #region
-        //public static ImageSource LoadImage(string url)
-        //{
-        //    var img = new BitmapImage();
-        //    using (var stream = new FileStream(url, FileMode.Open))
-        //    {
-        //        img.BeginInit();
-        //        img.CacheOption = BitmapCacheOption.OnLoad;
-        //        img.StreamSource = stream;
-        //        img.UriSource = new Uri(url, UriKind.Absolute);
-        //        stream.Close();
-        //        img.EndInit();
-        //    }
-        //    return img;
-        //}
-
-        public byte[] getJPGFromImageControl(BitmapImage imageC)
+        private void BackWindow()
         {
-            MemoryStream memStream = new MemoryStream();
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(imageC));
-            encoder.Save(memStream);
-            return memStream.ToArray();
-        }
-
-        public static byte[] ConvertBitmapSourceToByteArray(BitmapSource image)
-        {
-            byte[] data;
-            BitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(image));
-            using (MemoryStream ms = new MemoryStream())
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            foreach (Window window in Application.Current.Windows)
             {
-                encoder.Save(ms);
-                data = ms.ToArray();
+                if (window.DataContext == this)
+                    CloseWin(window);
             }
-            return data;
-        }
-
-
-        private static BitmapImage LoadImage(byte[] imageData)
+        } 
+        
+        private BitmapImage GetImageFromPath(string url)
         {
-            if (imageData == null || imageData.Length == 0) return null;
-            var image = new BitmapImage();
-            using (var mem = new MemoryStream(imageData))
-            {
-                mem.Position = 0;
-                image.BeginInit();
-                image.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                image.CacheOption = BitmapCacheOption.OnLoad;
-                image.UriSource = null;
-                image.StreamSource = mem;
-                image.EndInit();
-            }
-            image.Freeze();
-            return image;
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.UriSource = new Uri(url, UriKind.Absolute);
+            img.EndInit();
+            return img;
         }
-
-
-
-        #endregion
 
         public void CloseWin(object obj)
         {

@@ -16,6 +16,7 @@ namespace SpotyClient.ViewModel
         public CustomCommand RegUser { get; set; }
         public CustomCommand RegArtist { get; set; }
         public CustomCommand SingIn { get; set; }
+        public CustomCommand Test { get; set; }
 
         public MainWindowViewModel(UserApi user)
         {
@@ -50,6 +51,11 @@ namespace SpotyClient.ViewModel
                     if (window.DataContext == this)
                         CloseWin(window);
                 }
+            });
+            Test = new CustomCommand(() =>
+            {
+                Test t = new Test();
+                t.Show();
             });
         }
 

@@ -16,9 +16,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\back.png" />
     <None Remove="Resource\bgvs.png" />
+    <None Remove="Resource\books.png" />
+    <None Remove="Resource\green-heart.png" />
+    <None Remove="Resource\heart.png" />
+    <None Remove="Resource\home.png" />
     <None Remove="Resource\logo24.png" />
+    <None Remove="Resource\magnifier.png" />
+    <None Remove="Resource\next.png" />
     <None Remove="Resource\NoImage.png" />
+    <None Remove="Resource\question.png" />
+    <None Remove="Resource\sounds.png" />
+    <None Remove="Resource\start.png" />
+    <None Remove="Resource\stop.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +39,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\back.png" />
     <Resource Include="Resource\bgvs.png" />
+    <Resource Include="Resource\books.png" />
+    <Resource Include="Resource\green-heart.png" />
+    <Resource Include="Resource\heart.png" />
+    <Resource Include="Resource\home.png" />
     <Resource Include="Resource\logo24.png" />
+    <Resource Include="Resource\magnifier.png" />
+    <Resource Include="Resource\next.png" />
     <Resource Include="Resource\NoImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resource\question.png" />
+    <Resource Include="Resource\sounds.png" />
+    <Resource Include="Resource\start.png" />
+    <Resource Include="Resource\stop.png" />
   </ItemGroup>
 
   <ItemGroup>

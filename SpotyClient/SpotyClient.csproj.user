@@ -22,6 +22,9 @@
     <Compile Update="View\SingInWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\Test.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Components\BindablePasswordBox.xaml">
@@ -43,6 +46,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\SingInWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Test.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

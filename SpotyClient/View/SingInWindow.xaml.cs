@@ -1,4 +1,5 @@
 ﻿using ModelsApi;
+using SpotyClient.Components;
 using SpotyClient.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -21,16 +22,27 @@ namespace SpotyClient.View
     /// </summary>
     public partial class SingInWindow : Window
     {
+        private ArtistApi entry;
+        public ArtistApi Entry
+        {
+            get => entry;
+            set
+            {
+                entry = value;
+            }
+        }
+
         public SingInWindow()
         {
             InitializeComponent();
-            DataContext = new SingInWindowViewModel(null);
+            DataContext = new SingInWindowViewModel(null, null);
         }
 
-        public SingInWindow(UserApi user)
+        public SingInWindow(UserApi user, ArtistApi artist)
         {
             InitializeComponent();
-            DataContext = new SingInWindowViewModel(user);
+            DataContext = new SingInWindowViewModel(user, artist);
+            
         }
     }
 }

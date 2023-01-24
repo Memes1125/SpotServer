@@ -35,3 +35,5 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\S
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\ref\SpotyClient.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\MasterWindow.g.cs
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\MasterWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\Test.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\Test.baml

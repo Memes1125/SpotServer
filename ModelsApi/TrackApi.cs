@@ -11,7 +11,7 @@ namespace ModelsApi
         public TimeSpan Duration { get; set; }
         public string Track1 { get; set; }
         public string Name { get; set; }
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
       
     }
