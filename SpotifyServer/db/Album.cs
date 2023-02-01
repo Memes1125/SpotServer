@@ -18,7 +18,6 @@ namespace SpotifyServer.db
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public TimeSpan Duration { get; set; }
         public string Image { get; set; }
 
         public virtual ICollection<AlbumTrack> AlbumTracks { get; set; }

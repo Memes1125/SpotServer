@@ -9,10 +9,7 @@ namespace ModelsApi
     public class AlbumApi : ApiBaseType
     {   
         public string Name { get; set; }
-        public TimeSpan Duration { get; set; } 
         public string Image { get; set; }
-        
-        
     }
     
 }

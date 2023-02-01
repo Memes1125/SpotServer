@@ -14,7 +14,7 @@ namespace SpotyClient.ViewModel
 {
     public class SingInWindowViewModel : Notify
     {
-        
+
         private dynamic entry; // так не делать, выхода другого небыло 
         public dynamic Entry   // так не делать, Думай ещё, так делать нельзя  
         {
@@ -30,11 +30,13 @@ namespace SpotyClient.ViewModel
         public List<ArtistApi> artists { get; set; }
         public CustomCommand SingIn { get; set; }
         public CustomCommand Back { get; set; }
-        
+        public ArtistApi Artist;
+        public static int UsId;
+        public static int ArtId;
 
         public SingInWindowViewModel(UserApi user, ArtistApi artist)
         {
-            
+
             Task.Run(GetListUsers).ContinueWith(s =>
             {
                 if (user == null)
@@ -78,50 +80,12 @@ namespace SpotyClient.ViewModel
                     Task.Run(GetListArtists);
                     Thread.Sleep(200);
 
-                    foreach (var Users in users)
-                    {
-                        if (Users.Email == Entry.Email && Users.Password == Entry.Password)
-                        {
-                            MasterWindow qq = new MasterWindow();
-                            qq.Show();
-                            foreach (Window window in Application.Current.Windows)
-                            {
-                                if (window.DataContext == this)
-                                    CloseWin(window);
-                            }
-                        }
-                        else if (Users.Password != Entry.Password && Users.Email != Entry.Email)
-                        {
-                            continue;
-                        }
-                    }
-
-                    foreach (var Artists in artists)
-                    {
-                        
-                        if (Artists.Email == Entry.Email && Artists.Password == Entry.Password)
-                        {
-                            MasterWindow qq = new MasterWindow();
-                            qq.Show();
-                            foreach (Window window in Application.Current.Windows)
-                            {
-                                if (window.DataContext == this)
-                                    CloseWin(window);
-                            }
-                        }
-                        else if (Artists.Password != Entry.Password && Artists.Email != Entry.Email)
-                        {
-                            continue;
-                        }
-                    }
-                    if (Application.Current.MainWindow?.IsActive == false)
-                        MessageBox.Show("Пароль или логин неверны, давай по новой");
-
+                    Login();
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show("Сервера отключены");
-                    
+
                 }
             });
 
@@ -129,6 +93,54 @@ namespace SpotyClient.ViewModel
             {
                 BackWindow();
             });
+        }
+
+        public void Login()
+        {
+            foreach (var Users in users)
+            {
+                if (Users.Email == Entry.Email && Users.Password == Entry.Password)
+                {
+                    MasterWindow qq = new MasterWindow();
+                    qq.Show();
+
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window.DataContext == this)
+                            CloseWin(window);
+                    }
+                    UsId = Users.Id;
+                }
+                else if (Users.Password != Entry.Password && Users.Email != Entry.Email)
+                {
+                    continue;
+                }
+
+            }
+
+            foreach (var Artists in artists)
+            {
+
+                if (Artists.Email == Entry.Email && Artists.Password == Entry.Password)
+                {
+                    MasterWindow qq = new MasterWindow();
+                    qq.Show();
+
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window.DataContext == this)
+                            CloseWin(window);
+                    }
+                    ArtId = Artists.Id;
+                }
+                else if (Artists.Password != Entry.Password && Artists.Email != Entry.Email)
+                {
+                    continue;
+                }
+            }
+            if (Application.Current.MainWindow?.IsActive == true)
+                MessageBox.Show("Пароль или логин неверны, давай по новой");
+
         }
 
         private void BackWindow()

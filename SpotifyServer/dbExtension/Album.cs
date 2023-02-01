@@ -12,7 +12,6 @@ namespace SpotifyServer.db
             return new AlbumApi
             {
                 Id = album.Id,
-                Duration = album.Duration,
                 Name = album.Name,
                 Image = album.Image
             };
@@ -25,7 +24,6 @@ namespace SpotifyServer.db
             return new Album
             {
                 Id = album.Id,
-                Duration = album.Duration,
                 Name = album.Name,
                 Image = album.Image
             };

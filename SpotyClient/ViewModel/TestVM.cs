@@ -11,6 +11,8 @@ namespace SpotyClient.ViewModel
     public class TestVM : Notify
     {
         private ArtistApi _selectedUser;
+        
+
         public ArtistApi SelectedUser
         {
             get => _selectedUser;
@@ -21,30 +23,54 @@ namespace SpotyClient.ViewModel
             }
         }
 
-        public List<ArtistApi> users;
-        public List<ArtistApi> Users
-        {
-            get => users;
-            set
+        //public List<UserApi> users;
+        //public List<UserApi> Users
+        //{
+        //    get => users;
+        //    set
+        //    {
+        //        users = value;
+        //        SignalChanged();
+        //    }
+        //}
+
+        private UserApi users;
+        public UserApi Users 
+        { 
+            get => users; 
+            set 
             {
                 users = value;
-                SignalChanged();
+                SignalChanged("Users");
             }
         }
 
-
-        public TestVM()
+        public TestVM(UserApi user)
         {
-            Task.Run(ProductsList);
+            //Task.Run(ProductsList);
+
+            Task.Run(GetUserId).ContinueWith(s =>
+            {
+                
+            });
         }
 
 
-        public async Task ProductsList()
-        {
-            var result = await Api.GetListAsync<ArtistApi[]>("Artist");
-            Users = new List<ArtistApi>(result);
-            SignalChanged("Users");
+        //public async Task ProductsList()
+        //{
+        //    var result = await Api.GetListAsync<ArtistApi[]>("Artist");
+        //    Users = new List<ArtistApi>(result);
+        //    SignalChanged("Users");
 
+        //}
+
+
+        public async Task GetUserId()
+        {
+            var t = SingInWindowViewModel.UsId;
+            var result = await Api.GetAsync<UserApi>(5, "User");
+            SignalChanged("result");
+            
         }
     }
 }

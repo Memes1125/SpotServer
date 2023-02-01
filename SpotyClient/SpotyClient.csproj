@@ -21,7 +21,8 @@
     <None Remove="Resource\books.png" />
     <None Remove="Resource\green-heart.png" />
     <None Remove="Resource\heart.png" />
-    <None Remove="Resource\home.png" />
+    <None Remove="Resource\home1.png" />
+    <None Remove="Resource\IMG_20210413_180100_224.jpg" />
     <None Remove="Resource\logo24.png" />
     <None Remove="Resource\magnifier.png" />
     <None Remove="Resource\next.png" />
@@ -44,7 +45,8 @@
     <Resource Include="Resource\books.png" />
     <Resource Include="Resource\green-heart.png" />
     <Resource Include="Resource\heart.png" />
-    <Resource Include="Resource\home.png" />
+    <Resource Include="Resource\home1.png" />
+    <Resource Include="Resource\IMG_20210413_180100_224.jpg" />
     <Resource Include="Resource\logo24.png" />
     <Resource Include="Resource\magnifier.png" />
     <Resource Include="Resource\next.png" />

@@ -1,4 +1,5 @@
-﻿using SpotyClient.ViewModel;
+﻿using ModelsApi;
+using SpotyClient.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,12 @@ namespace SpotyClient.View
         public Test()
         {
             InitializeComponent();
-            DataContext = new TestVM();
+            DataContext = new TestVM(null);
+        }
+        public Test(UserApi user)
+        {
+            InitializeComponent();
+            DataContext = new TestVM(user);
         }
     }
 }

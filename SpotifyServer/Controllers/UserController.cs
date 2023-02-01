@@ -28,7 +28,7 @@ namespace SpotifyServer.Controllers
             var user = await db.Users.FindAsync(id);
             if (user == null)
                 return NotFound();
-            return Ok();
+            return Ok(user);
         }
 
         [HttpPost]
