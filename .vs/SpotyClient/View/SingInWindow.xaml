@@ -1,0 +1,47 @@
+﻿<Window x:Class="SpotyClient.View.SingInWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpotyClient.View"
+        xmlns:components="clr-namespace:SpotyClient.Components"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        Title="SingInWindow" Height="400" Width="300">
+
+        <Window.Background>
+            <ImageBrush ImageSource="../Resource/bgvs.png"/>
+        </Window.Background>
+
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel DataContext="{Binding Entry}">
+            
+
+            <Label Content="Почта:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent" Margin="0 25 0 0"/>
+            <TextBox Text="{Binding Email}" Style="{StaticResource TextBoxGray}" Margin="0 10 0 0"/>
+
+            <Label Content="Пароль:" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent" Margin="0 25 0 0"/>
+            <components:BindablePasswordBox Margin="0 10 0 10" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+            <Button Width="250" Height="30" Margin="0 10 0 0" Style="{StaticResource ButtonForImage}" Command="{Binding BackPassword}" Content="Забыли пароль?"/>
+            
+        </StackPanel>
+        <Grid Grid.Row="1" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button  Width="140" Grid.Row="1" Command="{Binding SingIn}" Margin="5 10 5 10" Content="Вход" VerticalAlignment="Bottom" HorizontalAlignment="Center" Style="{StaticResource GreenButton}"/>
+            <Button Command="{Binding Back}" Width="140" Content="Назад" Grid.Column="1" Style="{StaticResource ButtonForImage}" Margin="5 10 5 10"/>
+        </Grid>
+        
+    </Grid>
+</Window>

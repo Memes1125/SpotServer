@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SpotyClient": {
+      "commandName": "Project",
+      "hotReloadEnabled": true
+    }
+  }
+}
