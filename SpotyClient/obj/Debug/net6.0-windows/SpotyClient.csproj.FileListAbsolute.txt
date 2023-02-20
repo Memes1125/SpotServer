@@ -51,3 +51,7 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\S
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\ref\SpotyClient.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\EditUserWindow.g.cs
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\EditUserWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\MasterArtistWindow.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\Pages\ProfileArtistPage.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\MasterArtistWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\Pages\ProfileArtistPage.baml

@@ -122,7 +122,7 @@ namespace SpotyClient.ViewModel
 
                 if (Artists.Email == Entry.Email && Artists.Password == Entry.Password)
                 {
-                    MasterWindow qq = new MasterWindow();
+                    MasterArtistWindow qq = new MasterArtistWindow();
                     qq.Show();
 
                     foreach (Window window in Application.Current.Windows)
@@ -137,7 +137,7 @@ namespace SpotyClient.ViewModel
                     continue;
                 }
             }
-            if (Application.Current.MainWindow?.IsActive == true)
+            if (Application.Current.MainWindow?.IsActive == false)
                 MessageBox.Show("Пароль или логин неверны, давай по новой");
 
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ModelsApi;
+using SpotyClient.Components;
 using SpotyClient.Tools;
 using SpotyClient.View;
 using SpotyClient.View.Pages;
@@ -93,6 +94,7 @@ namespace SpotyClient.ViewModel
         public async Task EditUsers()
         {
             await Api.PutAsync<UserApi>(EditUser, "User");
+            UserProfile.GetInstance().UpdateUser(EditUser);
         }
 
         public async Task GetUserId()

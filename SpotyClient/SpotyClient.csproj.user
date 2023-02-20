@@ -16,6 +16,9 @@
     <Compile Update="View\EditUserWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\MasterArtistWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\MasterWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\MyMediaLibraryPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Pages\ProfileArtistPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\ProfilePage.xaml.cs">
@@ -63,6 +69,9 @@
     <Page Update="Style.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\MasterArtistWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MasterWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\MyMediaLibraryPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Pages\ProfileArtistPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\ProfilePage.xaml">

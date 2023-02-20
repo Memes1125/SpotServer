@@ -35,12 +35,11 @@ namespace SpotifyServer.Controllers
             return Ok(album);
         }
 
-        
 
         [HttpPost]
-        public async Task<ActionResult<int>> Post([FromBody] AlbumApi value)
+        public async Task<ActionResult<int>> Post([FromBody] AlbumApi album)
         {
-            var newAlbum = (Album)value;
+            var newAlbum = (Album)album;
             db.Albums.Add(newAlbum);
             await db.SaveChangesAsync();
             return Ok(newAlbum.Id);

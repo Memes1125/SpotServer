@@ -23,7 +23,7 @@ namespace SpotyClient.View
         public MasterWindow()
         {
             InitializeComponent();
-            DataContext = new MasterWinViewModel();
+            DataContext = new MasterWinViewModel(Dispatcher);
         }
     }
 }

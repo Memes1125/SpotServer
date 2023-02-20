@@ -1,4 +1,5 @@
 ﻿using ModelsApi;
+using SpotyClient.Components;
 using SpotyClient.Tools;
 using SpotyClient.View;
 using SpotyClient.View.Pages;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SpotyClient.ViewModel
 {
@@ -26,7 +28,7 @@ namespace SpotyClient.ViewModel
             }
         }
 
-        public UserApi ProfileUser
+        public UserProfile ProfileUser
         { 
             get => profileUser;
             set 
@@ -42,15 +44,11 @@ namespace SpotyClient.ViewModel
         public CustomCommand Profile { get; set; }
         public CustomCommand Test { get; set; }
 
-        private UserApi profileUser;
+        private UserProfile profileUser;
+        private Dispatcher dispatcher;
 
-        public MasterWinViewModel()
+        public MasterWinViewModel(Dispatcher dispatcher)
         {
-
-            Task.Run(GetUserId);
-
-           
-
 
             Test = new CustomCommand(() =>
             {
@@ -87,6 +85,9 @@ namespace SpotyClient.ViewModel
                 CurentPage = new ProfilePage();
                 SignalChanged("CurentPage");
             });
+
+            Task.Run(GetUserId);
+            this.dispatcher = dispatcher;
         }
 
         public async Task GetUserId()
@@ -94,8 +95,11 @@ namespace SpotyClient.ViewModel
             Task.Delay(200).Wait();
             var t = SingInWindowViewModel.UsId;
             var result = await Api.GetAsync<UserApi>(t, "User");
-            ProfileUser = result;
+            ProfileUser = UserProfile.GetInstance();
+            ProfileUser.UpdateUser(result);
             SignalChanged("ProfileUser");
+
+            dispatcher.Invoke(() => Profile.Execute(null));
         }
        
         

@@ -15,8 +15,10 @@ namespace SpotyClient.ViewModel
 {
     public class AddAlbumViewModel : Notify
     {
-        
+
         private BitmapImage image;
+        private UserApi userId;
+
         public BitmapImage Image
         {
             get => image;
@@ -26,16 +28,25 @@ namespace SpotyClient.ViewModel
                 SignalChanged("Image");
             }
         }
-        public List<UserApi> users { get; set; }
         public List<AlbumApi> albums { get; set; }
         public AlbumApi AddAlbum { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand SaveAlbum { get; set; }
+        int t = SingInWindowViewModel.UsId;
+        public UserApi UserId
+        { 
+            get => userId;
+            set 
+            {
+                userId = value;
+                SignalChanged("UserId");
+            } 
+        }
 
         public AddAlbumViewModel(AlbumApi album)
         {
             Task.Run(GetListAlbums);
-            
+
 
             if (album == null)
             {
@@ -53,7 +64,7 @@ namespace SpotyClient.ViewModel
 
             SaveAlbum = new CustomCommand(() =>
             {
-                
+
                 if (AddAlbum.Id == 0)
                 {
                     Task.Run(CreateNewAlbum);
@@ -68,7 +79,7 @@ namespace SpotyClient.ViewModel
                 }
                 else
                     Task.Run(EditAlbums);
-                
+
             });
 
             string directory = Environment.CurrentDirectory;
@@ -109,7 +120,7 @@ namespace SpotyClient.ViewModel
             Window win = obj as Window;
             win.Close();
         }
-
+        
 
         public async Task EditAlbums()
         {
@@ -128,11 +139,11 @@ namespace SpotyClient.ViewModel
             SignalChanged("albums");
         }
 
-        public async Task GetListUsers()
+        public async Task GetUserId()
         {
-            var result = await Api.GetListAsync<UserApi[]>("User");
-            users = new List<UserApi>(result);
-            SignalChanged("users");
+            var result = await Api.GetAsync<UserApi>(t, "User");
+            UserId = result;
+            SignalChanged("UserId");
         }
     }
 }
