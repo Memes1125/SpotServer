@@ -8,8 +8,10 @@
 # Редактирование альбома :heavy_check_mark:
 # Главное окно артиста :heavy_check_mark:
 # Создание Альбома :heavy_check_mark:
-# Редактирование пользователя :heavy_check_mark:
-# Редактирование альбома
+# Редактирование артиста :heavy_check_mark:
+# Редактирование альбома :heavy_check_mark:
+
+
 # Добавление книги :heavy_check_mark:
 # Добавление автора :heavy_check_mark:
 # Добавление жанра :heavy_check_mark:
