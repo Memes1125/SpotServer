@@ -1,4 +1,5 @@
 ﻿using ModelsApi;
+using SpotyClient.Components;
 using SpotyClient.Tools;
 using System;
 using System.Collections.Generic;
@@ -105,11 +106,12 @@ namespace SpotyClient.ViewModel
             }
         }
 
-
+        public Track PlayingTrack { get; set; }
         public List<TrackApi> searchResultTrack;
         public List<AlbumApi> searchResultAlbum;
         public List<TrackApi> mysearchTrack { get; set; }
         public List<AlbumApi> mysearchAlbum { get; set; }
+        public CustomCommand Play { get; set; }
         public CustomCommand AddLikes { get; set; }
         public CustomCommand AddLikesAlbumCommand { get; set; }
 
@@ -117,6 +119,19 @@ namespace SpotyClient.ViewModel
         {
             Task.Run(GetTacks);
             Task.Run(GetAlbums);
+
+            Play = new CustomCommand(() =>
+            {
+                if (SelectedTrak == null)
+                    return;
+                foreach (var trackqwqw in Traks)
+                {
+                    if (SelectedTrak.Id == trackqwqw.Id)
+                    {
+                        Components.Track.GetInstance().UpdateTrack(trackqwqw);
+                    }
+                }
+            });
 
             AddLikes = new CustomCommand(() =>
             {

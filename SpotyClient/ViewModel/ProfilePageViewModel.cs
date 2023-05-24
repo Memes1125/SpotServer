@@ -1,4 +1,5 @@
 ﻿using ModelsApi;
+using SpotyClient.Components;
 using SpotyClient.Tools;
 using SpotyClient.View;
 using System;
@@ -48,7 +49,7 @@ namespace SpotyClient.ViewModel
                 SignalChanged("Albums");
             }
         }
-
+        
         public CustomCommand NewAlbum { get; set; }
         public AlbumApi Album;
         public UserApi ProfileUser { get; set; }

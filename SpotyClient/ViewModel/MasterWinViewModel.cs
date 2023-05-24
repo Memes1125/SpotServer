@@ -18,6 +18,7 @@ namespace SpotyClient.ViewModel
     {
         private object _curentPage;
 
+
         public object CurentPage
         {
             get { return _curentPage; }
@@ -37,6 +38,17 @@ namespace SpotyClient.ViewModel
                 SignalChanged("ProfileUser");
             } 
         }
+
+        public Track PlayingTrack
+        {
+            get => playingTrack;
+            set
+            {
+                playingTrack = value;
+                SignalChanged("PlayingTrack");
+            }
+        }
+
         public CustomCommand Main { get; set; }
         public CustomCommand Help { get; set; }
         public CustomCommand Search { get; set; }
@@ -46,6 +58,7 @@ namespace SpotyClient.ViewModel
 
         private UserProfile profileUser;
         private Dispatcher dispatcher;
+        private Track playingTrack;
 
         public MasterWinViewModel(Dispatcher dispatcher)
         {
@@ -88,6 +101,7 @@ namespace SpotyClient.ViewModel
 
             Task.Run(GetUserId);
             this.dispatcher = dispatcher;
+            Task.Run(GetTrackId);
         }
 
         public async Task GetUserId()
@@ -101,8 +115,13 @@ namespace SpotyClient.ViewModel
 
             dispatcher.Invoke(() => Profile.Execute(null));
         }
-       
-        
+
+        public async Task GetTrackId()
+        {
+            Task.Delay(200).Wait();
+            PlayingTrack = Track.GetInstance();
+            SignalChanged("PlayingTrack");
+        }
 
     }
 }

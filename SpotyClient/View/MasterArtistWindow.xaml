@@ -160,7 +160,7 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="290"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Label DataContext="{Binding PlayingTrack}" Content="{Binding Duration}" HorizontalAlignment="Left" Grid.Column="2" Margin="0 5 5 0"/>
