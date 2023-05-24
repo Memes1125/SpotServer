@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ModelsApi;
 using SpotifyServer.db;
+using SpotyClient.ViewModel;
 
 namespace SpotifyServer.Controllers
 {
@@ -37,6 +38,13 @@ namespace SpotifyServer.Controllers
             var newTrack = (Track)value;
             db.Tracks.Add(newTrack);
             await db.SaveChangesAsync();
+
+            ArtistsTrakApi art = new ArtistsTrakApi();
+            art.IdTrack = newTrack.Id;
+            art.IdArtist = AddTrackViewModel.UsArtist();
+            db.ArtistsTraks.Add((ArtistsTrak)art);
+            await db.SaveChangesAsync();
+
             return Ok(newTrack.Id);
         }
 

@@ -1,0 +1,87 @@
+﻿<Window x:Class="SpotyClient.View.AddTrackWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpotyClient.View"
+        xmlns:convert="clr-namespace:SpotyClient.Components"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="AddAlbumWindow" Height="550" Width="300">
+
+        <Window.Background>
+            <ImageBrush ImageSource="../Resource/bgvs.png"/>
+        </Window.Background>
+
+        <Window.Resources>
+            <convert:ImgPathConverter x:Key="pathConverter"/>
+            <convert:TrackPathConverter x:Key="trackPathConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition  />
+        </Grid.RowDefinitions>
+
+        <StackPanel  Margin="0 15 0 0" DataContext="{Binding AddTrack}">
+            <Label Content="Название трека:" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 5 0 0" 
+                   FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent"
+                   />
+            <TextBox Text="{Binding Name}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="0 5 0 0" DataContext="{Binding AddTrack}">
+            <Label Content="Длительность трека:" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 5 0 0" 
+                   FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent"
+                   />
+            <TextBox Text="{Binding Duration}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <Label Content="Изображение трека:" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 5 0 5"
+                   FontWeight="Bold" Foreground="White" FontSize="15"
+                   />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image  Height="70" Width="70" Grid.Column="0" Margin="0 10 0 10" Source="{Binding Image, Converter={StaticResource pathConverter}}" DataContext="{Binding AddTrack}"/>
+
+                <Button Command="{Binding SelectImage}" Content="Добавить каритнку" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="1" Style="{StaticResource ButtonForImage}"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <Label Content="Файл трека:" 
+                   HorizontalAlignment="Center" 
+                   Margin="0 5 0 5"
+                   FontWeight="Bold" Foreground="White" FontSize="15"
+                   />
+            <Grid>
+                <MediaElement LoadedBehavior="Manual" Source="{Binding Track1, Converter={StaticResource trackPathConverter}}"/>
+                <Button Command="{Binding SelectTrack}" Content="Выбрать файл" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="1" Style="{StaticResource ButtonForImage}"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid Grid.Row="4" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+            <Button Width="140" Content="Сохранить" Command="{Binding SaveTrack}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}" Margin="5 80 0 0"/>
+            <Button Width="140" Content="Назад" Command="{Binding Back}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Style="{StaticResource ButtonForImage}" Margin="5 80 0 0"/>
+        </Grid>
+    </Grid>
+</Window>

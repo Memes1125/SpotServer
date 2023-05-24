@@ -28,6 +28,9 @@
     <Reference Include="ModelsApi">
       <HintPath>..\ModelsApi\bin\Debug\net6.0\ModelsApi.dll</HintPath>
     </Reference>
+    <Reference Include="SpotyClient">
+      <HintPath>..\SpotyClient\bin\Debug\net6.0-windows\SpotyClient.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

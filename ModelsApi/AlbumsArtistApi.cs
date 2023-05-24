@@ -10,5 +10,7 @@ namespace ModelsApi
     {
         public int IdAlbums { get; set; }
         public int IdArtists { get; set; }
+
+        public AlbumApi Albums { get; set; }
     }
 }

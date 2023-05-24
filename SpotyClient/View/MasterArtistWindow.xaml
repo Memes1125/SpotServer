@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:convert="clr-namespace:SpotyClient.Components"
+        xmlns:e="clr-namespace:EventBinder;assembly=EventBinder"
+        xmlns:mvvm="clr-namespace:MvvmEventBinding;assembly=MvvmEventBinding"
         WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:SpotyClient.View"
         mc:Ignorable="d"
@@ -11,6 +13,7 @@
         MinWidth="600" MinHeight="500">
     <Window.Resources>
         <convert:ImgPathConverter x:Key="pathConverter"/>
+        <convert:TrackPathConverter x:Key="trackPathConverter"/>
     </Window.Resources>
 
     <Grid>
@@ -30,7 +33,7 @@
             </Grid.RowDefinitions>
 
             <Border Background="DarkGray"/>
-            <StackPanel Orientation="Horizontal" Height="35" Width="150" HorizontalAlignment="Right" Margin="0 0 100 0" >
+            <StackPanel Orientation="Horizontal" Height="35" Width="200" HorizontalAlignment="Right" Margin="0 0 100 0" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -81,15 +84,6 @@
                 <Button Grid.Column="1" Command="{Binding Search}" Content="Поиск" Style="{StaticResource TransponentButtonWin}" HorizontalAlignment="Center" />
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0 15 0 10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Image Height="25" Width="25" Source="/Resource/books.png" Margin="5 0 5 0"/>
-                <Button Grid.Column="1" Command="{Binding MyMediaLibrary}" Content="Моя медиатека" Style="{StaticResource TransponentButtonWin}" HorizontalAlignment="Center" />
-            </Grid>
-
             <Grid Grid.Row="4" Margin="0 15 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -116,26 +110,33 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Image Height="50" Width="50" Margin="15 0 15 0"/>
+                <Image DataContext="{Binding PlayingTrack}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Height="50" Width="50" Margin="15 0 15 0"/>
 
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Content="Name Track" Style="{StaticResource NameTrack}" VerticalAlignment="Bottom" />
-                    <Label Grid.Row="1" Content="Исполнители" VerticalAlignment="Bottom"/>
+                    <StackPanel DataContext="{Binding PlayingTrack}" Grid.RowSpan="2">
+                        <Label Content="{Binding Name}"/>
+                    </StackPanel>
+                    <Button Grid.RowSpan="2"  Style="{StaticResource NameTrack}" VerticalAlignment="Center"/>
+
                 </Grid>
                 <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Margin="5 0 5 0" HorizontalAlignment="Center">
                     <Image Source="/Resource/heart.png"/>
                 </Button>
+                <MediaElement x:Name="media1" Source="{Binding Track1, Converter={StaticResource trackPathConverter}, UpdateSourceTrigger=PropertyChanged}" DataContext="{Binding PlayingTrack}" LoadedBehavior="Manual"  MediaOpened="media1_MediaOpened"/>
+                <!--x:Name="media1" LoadedBehavior="Manual" MediaOpened="{Binding MediaOpened}"  Source="{Binding Track1, Converter={StaticResource trackPathConverter}}"-->
+                <!--{e:EventBinding MediaOpenedMethod}-->
+                
 
             </Grid>
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="37.5"/>
                 </Grid.RowDefinitions>
 
                 <Grid>
@@ -148,7 +149,7 @@
                     <Button Style="{StaticResource ButtonImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="225 3 5 5">
                         <Image Source="/Resource/back.png" HorizontalAlignment="Center"/>
                     </Button>
-                    <Button  Grid.Column="1" Style="{StaticResource ButtonImage}">
+                    <Button Command="{Binding Play}" x:Name="playButton"  Click="playButton_Click"  Grid.Column="1" Style="{StaticResource ButtonImage}">
                         <Image Source="/Resource/start.png"/>
                     </Button>
                     <Button  Grid.Column="2" Style="{StaticResource ButtonImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3 225 5">
@@ -162,9 +163,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="00:00" HorizontalAlignment="Right" Margin="0 5 5 0"/>
-                    <Slider Grid.Column="1" VerticalAlignment="Center"/>
-                    <Label Grid.Column="2" HorizontalAlignment="Left" Content="00:00" Margin="5 5 0 0"/>
+                    <Label DataContext="{Binding PlayingTrack}" Content="{Binding Duration}" HorizontalAlignment="Left" Grid.Column="2" Margin="0 5 5 0"/>
+                    <Slider x:Name="slider2" Height="20" VerticalAlignment="Center" Grid.Column="1"  ValueChanged="slider2_ValueChanged"  Opacity="0.1" />
+                    <Slider x:Name="sliderback2" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="time" Text="00:00"  HorizontalAlignment="Right" Margin="5 5 0 0"/>
                 </Grid>
             </Grid>
 
@@ -174,10 +176,8 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Height="30" Width="30" HorizontalAlignment="Right" Margin="10 0 10 0" Source="/Resource/sounds.png"/>
-                <Slider Grid.Column="1" Width="150" VerticalAlignment="Center"/>
+                <Slider x:Name="slider1" Minimum="0" Maximum="1" Value="0.5" ValueChanged="slider1_ValueChanged" Grid.Column="1" Width="150" VerticalAlignment="Center"/>
             </Grid>
-
-            <Frame Content="{Binding MusicPage}" NavigationUIVisibility="Hidden" />
         </Grid>
     </Grid>
 </Window>

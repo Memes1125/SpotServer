@@ -32,7 +32,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Image DataContext="{Binding ProfileUser}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Height="200" Width="200" Margin="10 10 0 0">
-                            <Image.Clip>
+                            <Image.Clip >
                                 <EllipseGeometry Center="100,100" RadiusX="100" RadiusY="100"/>
                             </Image.Clip>
                         </Image>
@@ -46,11 +46,11 @@
 
                 <StackPanel Grid.Row="1" Background="#3B3B3B">
                     <Button Content="Создать альбом" Command="{Binding NewAlbum}" Style="{StaticResource AddAlbum}" HorizontalAlignment="Left" Margin="10 10 0 0"/>
-                    <Label Content="Ваши Альбомы" HorizontalContentAlignment="Left" Margin="10 10 0 0"/>
+                    <Label Content="Ваши Альбомы" HorizontalContentAlignment="Left" Margin="10 10 0 0" Style="{StaticResource Lables}"/>
                     <ListBox Grid.Row="2" 
-                             ItemsSource="{Binding Albums}" 
+                             ItemsSource="{Binding UserAlbums}" 
                              ItemsPanel="{StaticResource listPanelTemplate}" 
-                             SelectedItem="{Binding SelectedAlbum}"
+                             SelectedItem="{Binding SelectedUserAlbum}"
                              Style="{StaticResource ListAlbums}"
                              ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
@@ -58,13 +58,13 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Vertical" Margin="20">
                                     <Border BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
-                                        <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center">
+                                        <Image Source="{Binding Albums.Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="Fill">
                                             <Image.Clip>
                                                 <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
                                             </Image.Clip>
                                         </Image>
                                     </Border>
-                                    <Label Content="{Binding Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                                    <Label Content="{Binding Albums.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:convert="clr-namespace:SpotyClient.Components"
         xmlns:local="clr-namespace:SpotyClient.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -11,6 +12,10 @@
         <Window.Background>
             <ImageBrush ImageSource="../Resource/bgvs.png"/>
         </Window.Background>
+
+        <Window.Resources>
+            <convert:ImgPathConverter x:Key="pathConverter"/>
+        </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -39,7 +44,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Height="70" Width="70" Grid.Column="0" Margin="0 10 0 10" Source="{Binding Image}"/>
+                <Image  Height="70" Width="70" Grid.Column="0" Margin="0 10 0 10" Source="{Binding Image, Converter={StaticResource pathConverter}}" DataContext="{Binding AddAlbum}"/>
 
                 <Button Command="{Binding SelectImage}" Content="Добавить каритнку" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="1" Style="{StaticResource ButtonForImage}"/>
             </Grid>
@@ -52,7 +57,7 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button Width="140" Content="Создать альбом" Command="{Binding SaveAlbum}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}" Margin="5 80 0 0"/>
+            <Button Width="140" Content="Сохранить" Command="{Binding SaveAlbum}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource GreenButton}" Margin="5 80 0 0"/>
             <Button Width="140" Content="Назад" Command="{Binding Back}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Style="{StaticResource ButtonForImage}" Margin="5 80 0 0"/>
         </Grid>
 

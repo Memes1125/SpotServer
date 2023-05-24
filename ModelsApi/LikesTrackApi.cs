@@ -10,5 +10,7 @@ namespace ModelsApi
     {
         public int IdTrack { get; set; }
         public int IdUser { get; set; }
+
+        public TrackApi traksL { get; set; }
     }
 }

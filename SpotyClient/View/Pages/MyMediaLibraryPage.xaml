@@ -4,11 +4,122 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SpotyClient.View.Pages"
+      xmlns:convert="clr-namespace:SpotyClient.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MyMediaLibraryPage">
 
+    <Page.Background>
+        <ImageBrush ImageSource="/Resource/bgvs.png"/>
+    </Page.Background>
+    <Page.Resources>
+        <ItemsPanelTemplate x:Key="listPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+        <convert:ImgPathConverter x:Key="pathConverter"/>
+    </Page.Resources>
+
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Любимые Треки" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
+            <Button Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Update" Command="{Binding Update}"/>
+            <Grid Margin="0 30 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border  Width="790" Background="Transparent">
+                    <WrapPanel>
+                        <Label Content="#" MinWidth="20" MaxWidth="20" HorizontalContentAlignment="Left" Margin="-70 0 0 0"/>
+                        <Label Content="name" MinWidth="300" MaxWidth="300" HorizontalContentAlignment="Center"/>
+                        <Label Content="duration" MinWidth="300" MaxWidth="300" HorizontalContentAlignment="Center"/>
+                    </WrapPanel>
+                </Border>
+            </Grid>
+            <ListBox Grid.Row="1" x:Name="list" Background="Transparent" ItemsSource="{Binding UserTracks}" SelectedItem="{Binding SelectedTrack}" BorderThickness="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel Orientation="Horizontal" Width="790" Background="Transparent">
+                            <Label Content="{Binding Number}" MinWidth="50" MaxWidth="50" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding traksL.Image, Converter={StaticResource pathConverter}, UpdateSourceTrigger=PropertyChanged}" Width="45" Height="45"  Margin="40 5 0 0"/>
+                                <Grid Grid.Column="1" MinWidth="252.5" MaxWidth="252.5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Margin="70 0 0 0" Content="{Binding traksL.Name}" Foreground="White"  FontSize="15" FontWeight="Bold" HorizontalContentAlignment="Left"/>
+                                </Grid>
+                            </Grid>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="{Binding traksL.Duration}" Margin="110 0 0 0" Grid.Column="1" MinWidth="190" MaxWidth="190" Foreground="White" VerticalAlignment="Center"/>
+                            </Grid>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteTrack}"/>
+                        <MenuItem Header="Добавить в альбом" Command="{Binding AddInAlbum}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Любимые Альбомы" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
+            <ListBox Grid.Row="2" 
+                             ItemsSource="{Binding LikesAlbums}" 
+                             ItemsPanel="{StaticResource listPanelTemplate}" 
+                             SelectedItem="{Binding SelectedLikesAlbum}"
+                             Style="{StaticResource ListAlbums}"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             Background="Transparent"
+                             ItemContainerStyle="{DynamicResource _ListBoxItemStyle}">
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="20">
+                            <Border BorderBrush="#ffff" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                <Image Source="{Binding Albums.Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+                            <Label Content="{Binding Albums.Name}" Foreground="White" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteAlbum}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
+            </ListBox>
+        </Grid>
     </Grid>
 </Page>

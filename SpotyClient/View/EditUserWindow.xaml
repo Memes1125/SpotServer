@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:convert="clr-namespace:SpotyClient.Components"
         xmlns:local="clr-namespace:SpotyClient.View"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="EditUserWindow" Height="400" Width="300">
     

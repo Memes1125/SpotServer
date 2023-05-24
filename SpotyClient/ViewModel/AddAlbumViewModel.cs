@@ -3,6 +3,7 @@ using ModelsApi;
 using SpotyClient.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,9 +16,9 @@ namespace SpotyClient.ViewModel
 {
     public class AddAlbumViewModel : Notify
     {
-
-        private BitmapImage image;
+        
         private UserApi userId;
+        private BitmapImage image;
 
         public BitmapImage Image
         {
@@ -28,11 +29,12 @@ namespace SpotyClient.ViewModel
                 SignalChanged("Image");
             }
         }
-        public List<AlbumApi> albums { get; set; }
+        public List<UserAlbumApi> albums { get; set; }
+        public List<AlbumsArtistApi> albumsArtist { get; set; }
         public AlbumApi AddAlbum { get; set; }
+        public CustomCommand Back { get; set;  }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand SaveAlbum { get; set; }
-        int t = SingInWindowViewModel.UsId;
         public UserApi UserId
         { 
             get => userId;
@@ -43,10 +45,18 @@ namespace SpotyClient.ViewModel
             } 
         }
 
+
         public AddAlbumViewModel(AlbumApi album)
         {
-            Task.Run(GetListAlbums);
 
+            if (SingInWindowViewModel.UsId != 0 || SingInWindowViewModel.ArtId != 0)
+            {
+                //Task.Run(GetListAlbums);
+                FailUser();
+                //Task.Run(GetListArtistAlbums);
+                FailArtist();
+            }
+            
 
             if (album == null)
             {
@@ -62,23 +72,51 @@ namespace SpotyClient.ViewModel
                 };
             }
 
+            Back = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
+
             SaveAlbum = new CustomCommand(() =>
             {
 
                 if (AddAlbum.Id == 0)
                 {
-                    Task.Run(CreateNewAlbum);
-                    Thread.Sleep(200);
-                    Task.Run(GetListAlbums);
-                    Thread.Sleep(200);
-                    foreach (Window window in Application.Current.Windows)
+                    try
                     {
-                        if (window.DataContext == this)
-                            CloseWin(window);
+                        if(AddAlbum.Name != null && AddAlbum.Image != null)
+                        {
+                            Task.Run(CreateNewAlbum);
+                            Thread.Sleep(300);
+                            Load();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Код ошибки: Value Error; \nНе все данные были введены", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }
+                    catch
+                    {
+                        MessageBox.Show("Код ошибки: Value Error; \nПроверьте заполненность данных!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    
                 }
                 else
+                {
                     Task.Run(EditAlbums);
+                    Thread.Sleep(300);
+                    Load();
+                }
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
 
             });
 
@@ -127,23 +165,79 @@ namespace SpotyClient.ViewModel
             await Api.PutAsync<AlbumApi>(AddAlbum, "Album");
         }
 
+
         public async Task CreateNewAlbum()
         {
             await Api.PostAsync<AlbumApi>(AddAlbum, "Album");
         }
 
+        #region Костыль для Юзера
+        static string pathUser = "D:\\HiddenFolder\\User.txt";
+        static string path = "D:\\HiddenFolder";
+        public static int Us()
+        {
+            
+            int result;
+            string str = File.ReadAllText(pathUser);
+            result = Convert.ToInt32(str);
+            return result;
+        }
+
+
+        public void FailUser()
+        {
+            if (!Directory.Exists(path))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+            var t = SingInWindowViewModel.UsId;
+            File.WriteAllText(pathUser, t.ToString());
+        }
+        #endregion
+
+        #region Костыль для Артиста
+        static string pathArtist = "D:\\HiddenFolder\\Artist.txt";
+        public static int UsArtist()
+        {
+            
+            int result;
+            string str = File.ReadAllText(pathArtist);
+            result = Convert.ToInt32(str);
+            return result;
+        }
+
+        public void FailArtist()
+        {
+            if (!Directory.Exists(path))
+            {
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
+            var t = SingInWindowViewModel.ArtId;
+            File.WriteAllText(pathArtist, t.ToString());
+        }
+        #endregion
+
+
         public async Task GetListAlbums()
         {
-            var result = await Api.GetListAsync<AlbumApi[]>("Album");
-            albums = new List<AlbumApi>(result);
+            var result = await Api.GetListAsync<UserAlbumApi[]>("UserAlbum");
+            albums = new List<UserAlbumApi>(result);
             SignalChanged("albums");
         }
 
-        public async Task GetUserId()
+        public async Task GetListArtistAlbums()
         {
-            var result = await Api.GetAsync<UserApi>(t, "User");
-            UserId = result;
-            SignalChanged("UserId");
+            var result = await Api.GetListAsync<AlbumsArtistApi[]>("AlbumsArtist");
+            albumsArtist = new List<AlbumsArtistApi>(result);
+            SignalChanged("albumsArtist");
+        }
+
+
+        public void Load()
+        {
+            Task.Run(GetListAlbums);
         }
     }
 }

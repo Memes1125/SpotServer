@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -31,6 +32,9 @@ namespace SpotyClient.ViewModel
                 SignalChanged("ImageBitMap");
             }
         }
+
+        Regex regexMail = new Regex(@"^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$");
+        Regex regexPassword = new Regex(@"^[\w@-]{8,20}");
 
         public List<UserApi> users { get; set; }
         public UserApi AddUser { get; set; }
@@ -62,21 +66,42 @@ namespace SpotyClient.ViewModel
 
             SaveUser = new CustomCommand(() =>
             {
-                if (AddUser.Password == PasswordConfirm)
+                if (AddUser.Email == null)
                 {
-                    if (AddUser.Id == 0)
+                    MessageBox.Show("Email не введен");
+                    return;
+                }
+                if (regexMail.IsMatch(AddUser.Email))
+                {
+                    if (AddUser.Password == null)
                     {
-                        Task.Run(CreateNewUser);
-                        Thread.Sleep(200);
-                        Task.Run(GetListUsers);
+                        MessageBox.Show("Пароль не введен");
+                        return;
+                    }
+                    if (regexPassword.IsMatch(AddUser.Password))
+                    {
+                        if (AddUser.Password == PasswordConfirm)
+                        {
+
+                            if (AddUser.Id == 0)
+                            {
+                                Task.Run(CreateNewUser);
+                                Thread.Sleep(200);
+                                Task.Run(GetListUsers);
+                            }
+                            else
+                                Task.Run(EditUsers);
+
+                            BackWindow();
+                        }
+                        else
+                            MessageBox.Show("Пароли не совпадают");
                     }
                     else
-                        Task.Run(EditUsers);
-
-                    BackWindow();
+                        MessageBox.Show("Пароль не соответсвует требованиям");
                 }
                 else
-                    MessageBox.Show("Чёт с паролем не так");
+                    MessageBox.Show("Почта не соответсвует требованиям");
             });
 
             string directory = Environment.CurrentDirectory;

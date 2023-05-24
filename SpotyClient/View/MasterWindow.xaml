@@ -115,21 +115,20 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-
-                <Image Height="50" Width="50" Margin="15 0 15 0"/>
-
+                
+                <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Height="50" Width="50" Margin="15 0 15 0"/>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Content="Name Track" Style="{StaticResource NameTrack}" VerticalAlignment="Bottom" />
-                    <Label Grid.Row="1" Content="Исполнители" VerticalAlignment="Bottom"/>
+                    
+                    <Button Grid.RowSpan="2" Content="{Binding Track.Name}" Style="{StaticResource NameTrack}" VerticalAlignment="Center" />
                 </Grid>
                 <Button Grid.Column="2" Style="{StaticResource ButtonImage}" Margin="5 0 5 0" HorizontalAlignment="Center">
                     <Image Source="/Resource/heart.png"/>
                 </Button>
-
+                <MediaElement x:Name="media1" LoadedBehavior="Manual" Source="{Binding Track.Track1}"/> <!--MediaOpened="MediaElement_MediaOpened"--> 
             </Grid>
 
             <Grid Grid.Column="1">
@@ -148,7 +147,7 @@
                     <Button Style="{StaticResource ButtonImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="225 3 5 5">
                         <Image Source="/Resource/back.png" HorizontalAlignment="Center"/>
                     </Button>
-                    <Button  Grid.Column="1" Style="{StaticResource ButtonImage}">
+                    <Button x:Name="playButton"   Grid.Column="1" Style="{StaticResource ButtonImage}"><!--Click="playButton_Click"-->
                         <Image Source="/Resource/start.png"/>
                     </Button>
                     <Button  Grid.Column="2" Style="{StaticResource ButtonImage}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3 225 5">
@@ -162,9 +161,10 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="00:00" HorizontalAlignment="Right" Margin="0 5 5 0"/>
-                    <Slider Grid.Column="1" VerticalAlignment="Center"/>
-                    <Label Grid.Column="2" HorizontalAlignment="Left" Content="00:00" Margin="5 5 0 0"/>
+                    <Label Content="{Binding Track.Duration}" HorizontalAlignment="Left" Grid.Column="2" Margin="0 5 5 0"/>
+                    <Slider x:Name="slider2" Height="20" VerticalAlignment="Center" Grid.Column="1"  Opacity="0.1" /><!--ValueChanged="slider2_ValueChanged"-->  
+                    <Slider x:Name="sliderback2" IsHitTestVisible="False" Grid.Column="1" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="time" Text="00:00"  HorizontalAlignment="Right" Margin="5 5 0 0"/>
                 </Grid>
             </Grid>
 
@@ -174,13 +174,8 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Image Height="30" Width="30" HorizontalAlignment="Right" Margin="10 0 10 0" Source="/Resource/sounds.png"/>
-                <Slider Grid.Column="1" Width="150" VerticalAlignment="Center"/>
+                <Slider x:Name="slider1" Minimum="0" Maximum="1" Value="0.5"  Grid.Column="1" Width="150" VerticalAlignment="Center"/> <!--ValueChanged="slider1_ValueChanged"-->
             </Grid>
-
-            <Frame Content="{Binding MusicPage}" NavigationUIVisibility="Hidden" />
         </Grid>
-        
-        
-        
     </Grid>
 </Window>

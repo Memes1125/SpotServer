@@ -104,8 +104,5 @@ namespace SpotyClient.ViewModel
             EditUser = result;
             SignalChanged("EditUser");
         }
-
-        
-        
     }
 }

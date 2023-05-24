@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace SpotyClient
 {
@@ -46,7 +47,10 @@ namespace SpotyClient
             var str = JsonSerializer.Serialize(value, typeof(T));
             var answer = await client.PostAsync(server + controller, new StringContent(str, Encoding.UTF8, "application/json"));
             if (answer.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show(str, answer.ToString());
                 return -1;
+            }
             string answerText = await answer.Content.ReadAsStringAsync();
             if (!int.TryParse(answerText, out int result))
                 return -1;

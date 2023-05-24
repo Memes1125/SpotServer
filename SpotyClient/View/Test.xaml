@@ -5,31 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:convert="clr-namespace:SpotyClient.Components"
         xmlns:local="clr-namespace:SpotyClient.View"
+        xmlns:components="clr-namespace:SpotyClient.Components"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="Test" Height="450" Width="800">
+        Title="Test" Height="200" Width="800">
 
     <Window.Resources>
-        <convert:ImgPathConverter x:Key="pathConverter"/>
-        <ItemsPanelTemplate x:Key="listPanelTemplate">
-            <WrapPanel />
-        </ItemsPanelTemplate>
+        
     </Window.Resources>
 
     <Grid>
-        <ListBox Grid.Row="2" ItemsSource="{Binding Users}" ItemsPanel="{StaticResource listPanelTemplate}" SelectedItem="{Binding SelectedUser}" HorizontalContentAlignment="Stretch" SelectionMode="Extended" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical" Margin="20">
-                        <Image DataContext="{Binding ProfileUser}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center"/>
-                        <Label DataContext="{Binding ProfileUser}" Content="{Binding Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
-        <StackPanel Orientation="Vertical" Margin="20">
-            <Image DataContext="{Binding ProfileUser}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center"/>
-            <Label DataContext="{Binding ProfileUser}" Content="{Binding Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-        </StackPanel>
+        <TextBox Background="LightGray" Height="35" Width="200" Text="{Binding add}" />
+        <Button Height="35" Width="200" Margin="0 80 0 0" Command="{Binding button}"/>
+
     </Grid>
 </Window>

@@ -11,6 +11,7 @@ namespace ModelsApi
         public int IdTrack { get; set; }
         public int IdArtist { get; set; }
 
-
+        public TrackApi Tracks { get; set; }
+        public ArtistApi artists { get; set; }
     }
 }

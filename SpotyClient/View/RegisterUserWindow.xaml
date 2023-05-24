@@ -7,7 +7,7 @@
         xmlns:components="clr-namespace:SpotyClient.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="RegisterUserWindow" Height="600" Width="300">
+        Title="RegisterUserWindow" Height="670" Width="300">
         <Window.Background>
             <ImageBrush ImageSource="../Resource/bgvs.png"/>
         </Window.Background>
@@ -41,6 +41,7 @@
                    FontWeight="Bold" Foreground="White" FontSize="15"
                    />
             <TextBox Text="{Binding Email}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}" />
+            <TextBlock Text="Укажите правильную форму Email'a - name@domain.suffix" TextWrapping="Wrap" Width="250" Foreground="#ff0033" FontWeight="SemiBold" FontSize="11" Margin="35 -5 5 0"/>
         </StackPanel>
         <!--Пароль-->
         <StackPanel Grid.Row="3" DataContext="{Binding AddUser}">
@@ -50,6 +51,7 @@
                    FontWeight="Bold" Foreground="White" FontSize="15"
                    />
             <components:BindablePasswordBox Margin="0 10 0 10" Password="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBlock Text="Пароль должен содержать буквы, цифры,     (@, _ , - также допускаются) и состоять из 8-20 символов" Width="250" Foreground="#ff0033" FontWeight="SemiBold" FontSize="11" TextWrapping="Wrap" Margin="20 -5 5 0"/>
         </StackPanel>
         <!--Подтверждение пароля-->
         <StackPanel Grid.Row="4" >

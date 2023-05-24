@@ -64,4 +64,11 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EventBinder" Version="2.5.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.5.33428.366" />
+    <PackageReference Include="MvvmEventBinding" Version="1.0.0" />
+    <PackageReference Include="Prism.Core" Version="8.1.97" />
+  </ItemGroup>
+
 </Project>

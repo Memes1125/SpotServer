@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,6 +28,9 @@ namespace SpotyClient.ViewModel
                 SignalChanged("Image");
             }
         }
+
+        Regex regexMail = new Regex(@"^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$");
+        Regex regexPassword = new Regex(@"^[\w@-]{8,20}");
 
         public List<ArtistApi> artists { get; set; }
         public ArtistApi AddArtist { get; set; }
@@ -59,21 +63,42 @@ namespace SpotyClient.ViewModel
 
             SaveArtist = new CustomCommand(() =>
             {
-                if (AddArtist.Password == PasswordConfirm)
+                if (AddArtist.Email == null)
                 {
-                    if (AddArtist.Id == 0)
+                    MessageBox.Show("Email не введен");
+                    return;
+                }
+                if (regexMail.IsMatch(AddArtist.Email))
+                {
+                    if (AddArtist.Password == null)
                     {
-                        Task.Run(CreateNewArtist);
-                        Thread.Sleep(200);
-                        Task.Run(GetListArtists);
+                        MessageBox.Show("Пароль не введен");
+                        return;
+                    }
+                    if (regexPassword.IsMatch(AddArtist.Password))
+                    {
+                        if (AddArtist.Password == PasswordConfirm)
+                        {
+                            if (AddArtist.Id == 0)
+                            {
+                                Task.Run(CreateNewArtist);
+                                Thread.Sleep(200);
+                                Task.Run(GetListArtists);
+                            }
+                            else
+                                Task.Run(EditArtists);
+
+                            BackWindow();
+                        }
+                        else
+                            MessageBox.Show("Пароли не совпадают");
                     }
                     else
-                        Task.Run(EditArtists);
-
-                    BackWindow();
+                        MessageBox.Show("Пароль не соответсвует требованиям");
                 }
                 else
-                    MessageBox.Show("Чёт с паролем не так");
+                    MessageBox.Show("Почта не соответсвует требованиям");
+
             });
             string directory = Environment.CurrentDirectory;
             SelectImage = new CustomCommand(() =>

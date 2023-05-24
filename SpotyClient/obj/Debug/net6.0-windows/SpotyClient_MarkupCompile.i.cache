@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\App.xaml
-17-1526446065
+301723527040
 
-37-371769171
-195-1386726453
-Components\BindablePasswordBox.xaml;Style.xaml;View\AddAlbumWindow.xaml;View\EditUserWindow.xaml;View\MainWindow.xaml;View\MasterArtistWindow.xaml;View\MasterWindow.xaml;View\Pages\HelpPage.xaml;View\Pages\MainPage.xaml;View\Pages\MyMediaLibraryPage.xaml;View\Pages\ProfileArtistPage.xaml;View\Pages\ProfilePage.xaml;View\Pages\SearchPage.xaml;View\RegisterArtistWindow.xaml;View\RegisterUserWindow.xaml;View\SingInWindow.xaml;View\Test.xaml;
+46-116427952
+222241011096
+Components\BindablePasswordBox.xaml;Components\DropDownContent.xaml;ScrollCustom\Colors.xaml;ScrollCustom\HorizontalScrollBar.xaml;ScrollCustom\ScrollBar.xaml;ScrollCustom\ScrollBarBottomButton.xaml;ScrollCustom\ScrollBarLineButton.xaml;ScrollCustom\ScrollBarPageButton.xaml;ScrollCustom\ScrollBarRightButton.xaml;ScrollCustom\ScrollBarThumb.xaml;ScrollCustom\ScrollStyle.xaml;ScrollCustom\VerticalScrollBar.xaml;Style.xaml;View\AddAlbumWindow.xaml;View\AddTrackWindow.xaml;View\EditArtistWindow.xaml;View\EditUserWindow.xaml;View\MainWindow.xaml;View\MasterArtistWindow.xaml;View\MasterWindow.xaml;View\Pages\HelpPage.xaml;View\Pages\MainPage.xaml;View\Pages\MyMediaLibraryPage.xaml;View\Pages\ProfileArtistPage.xaml;View\Pages\ProfilePage.xaml;View\Pages\SearchPage.xaml;View\RegisterArtistWindow.xaml;View\RegisterUserWindow.xaml;View\SingInWindow.xaml;View\Test.xaml;
 
 True
 

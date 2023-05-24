@@ -70,13 +70,13 @@ namespace SpotifyServer.db
                     .WithMany(p => p.AlbumsArtists)
                     .HasForeignKey(d => d.IdAlbums)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AlbumsArtists_Albums");
+                    .HasConstraintName("FK_AlbumsArtists_Albums1");
 
                 entity.HasOne(d => d.IdArtistsNavigation)
                     .WithMany(p => p.AlbumsArtists)
                     .HasForeignKey(d => d.IdArtists)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_AlbumsArtists_Artists");
+                    .HasConstraintName("FK_AlbumsArtists_Artists1");
             });
 
             modelBuilder.Entity<Artist>(entity =>

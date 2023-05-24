@@ -32,5 +32,11 @@ namespace SpotyClient.View
             InitializeComponent();
             DataContext = new MainWindowViewModel(user);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Test test = new();
+            test.ShowDialog();
+        }
     }
 }

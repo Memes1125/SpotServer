@@ -4,6 +4,7 @@ using ModelsApi;
 using SpotifyServer.db;
 using System.ComponentModel;
 using Newtonsoft.Json;
+using SpotyClient.ViewModel;
 
 namespace SpotifyServer.Controllers
 {
@@ -35,13 +36,30 @@ namespace SpotifyServer.Controllers
             return Ok(album);
         }
 
-
         [HttpPost]
         public async Task<ActionResult<int>> Post([FromBody] AlbumApi album)
         {
             var newAlbum = (Album)album;
             db.Albums.Add(newAlbum);
             await db.SaveChangesAsync();
+            
+            UserAlbumApi usA = new UserAlbumApi();
+            usA.IdAlbum = newAlbum.Id;
+            usA.IdUser = AddAlbumViewModel.Us();
+            if (usA.IdUser == 0)
+            {
+                AlbumsArtist albArt = new AlbumsArtist();
+                albArt.IdArtists = AddAlbumViewModel.UsArtist();
+                albArt.IdAlbums = newAlbum.Id;
+                db.AlbumsArtists.Add(/*(AlbumsArtist)*/albArt);
+                await db.SaveChangesAsync();
+            }
+            else
+            {
+                db.UserAlbums.Add((UserAlbum)usA);
+                await db.SaveChangesAsync();
+            }
+
             return Ok(newAlbum.Id);
         }
 

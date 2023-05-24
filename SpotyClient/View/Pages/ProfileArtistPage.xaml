@@ -31,49 +31,93 @@
                             <ColumnDefinition Width="125"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image DataContext="{Binding ProfileArtist}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Height="200" Width="800" Grid.ColumnSpan="3">
+                        <Image DataContext="{Binding ProfileArtist}" Source="{Binding Image, Converter={StaticResource pathConverter}}" Height="250" Width="auto" Grid.ColumnSpan="3" Stretch="Fill">
                            
                         </Image>
-                        
-                        <Label Grid.ColumnSpan="2" DataContext="{Binding ProfileArtist}" Content="{Binding Name}" FontWeight="Bold" FontSize="60"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15 0 0 30"/>
+
+                        <Label Grid.ColumnSpan="2" DataContext="{Binding ProfileArtist}" Content="{Binding Name}" FontWeight="Bold" FontSize="60"  HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15 0 0 30" Foreground="White"/>
                         <Button Grid.Column="2" Content="Выход" Command="{Binding Exit}" Style="{StaticResource GreenButtonProfile}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 150 0 0"/>
-                        <Button Grid.Column="2" Content="Новый трек" Command="{Binding AddTrack}" Style="{StaticResource GreenButtonProfile}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 0"/>
                         <Button Grid.Column="2" Content="Редактировать" Command="{Binding Edit}" Style="{StaticResource GreenButtonProfile}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 150"/>
                     </Grid>
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Background="#3B3B3B">
-                    <Button Content="Создать альбом" Command="{Binding NewAlbum}" Style="{StaticResource AddAlbum}" HorizontalAlignment="Left" Margin="10 10 0 0"/>
-                    <Label Content="Ваши Альбомы" HorizontalContentAlignment="Left" Margin="10 10 0 0"/>
-                    <ListBox Grid.Row="2" 
-                             ItemsSource="{Binding Albums}" 
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Background="#3B3B3B">
+                        <Button Content="Создать альбом" Command="{Binding NewAlbum}" Style="{StaticResource AddAlbum}" HorizontalAlignment="Left" Margin="10 10 0 0"/>
+                        <Label Content="Ваши Альбомы" HorizontalContentAlignment="Left" Margin="10 10 0 0" Style="{StaticResource Lables}"/>
+                        <ListBox Grid.Row="2" 
+                             ItemsSource="{Binding AlbumsArtist}" 
                              ItemsPanel="{StaticResource listPanelTemplate}" 
-                             SelectedItem="{Binding SelectedAlbum}"
+                             SelectedItem="{Binding SelectedAlbumsArtist}"
                              Style="{StaticResource ListAlbums}"
                              ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
                              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                        <ListBox.ItemTemplate >
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical" Margin="20">
-                                    <Border BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
-                                        <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center">
-                                            <Image.Clip>
-                                                <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
-                                            </Image.Clip>
-                                        </Image>
-                                    </Border>
-                                    <Label Content="{Binding Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                        <ListBox.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Редактировать" Command="{Binding EditAlbum}"/>
-                                <MenuItem Header="Удалить" Command="{Binding DeleteAlbum}"/>
-                            </ContextMenu>
-                        </ListBox.ContextMenu>
-                    </ListBox>
-                </StackPanel>
+                            <ListBox.ItemTemplate >
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Margin="20">
+                                        <Border BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                            <Image Source="{Binding Albums.Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                                <Image.Clip>
+                                                    <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Border>
+                                        <Label Content="{Binding Albums.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Редактировать" Command="{Binding EditAlbum}"/>
+                                    <MenuItem Header="Удалить" Command="{Binding DeleteAlbum}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                        </ListBox>
+                    </StackPanel>
+
+
+
+                    <StackPanel Grid.Column="2" Background="#3B3B3B">
+                        <Button Content="Создать трек" Command="{Binding AddTrack}" Style="{StaticResource AddAlbum}" Width="90" HorizontalAlignment="Left" Margin="10 10 0 0"/>
+                        <Label Content="Ваши Треки" HorizontalContentAlignment="Left" Margin="10 10 0 0" Style="{StaticResource Lables}"/>
+                        <ListBox Grid.Row="2" 
+                             ItemsSource="{Binding ArtistTracks}" 
+                             ItemsPanel="{StaticResource listPanelTemplate}" 
+                             SelectedItem="{Binding SelectedTrack}"
+                             Style="{StaticResource ListAlbums}"
+                             ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
+                             PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+                            <ListBox.ItemTemplate >
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" Margin="20">
+                                        <Border BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                            <Image Source="{Binding Tracks.Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                                <Image.Clip>
+                                                    <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                                </Image.Clip>
+                                            </Image>
+                                        </Border>
+                                        <Label Content="{Binding Tracks.Name}" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                            <ListBox.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Редактировать" Command="{Binding EditTrack}"/>
+                                    <MenuItem Header="Играть" Command="{Binding Play}"/>
+                                    <MenuItem Header="Добавить в Альбом" Command="{Binding AddInAlbum}"/>
+                                    <MenuItem Header="Удалить" Command="{Binding DeleteTrack}"/>
+                                </ContextMenu>
+                            </ListBox.ContextMenu>
+                        </ListBox>
+                    </StackPanel>
+
+                </Grid>
             </StackPanel>
         </ScrollViewer>
     </Grid>

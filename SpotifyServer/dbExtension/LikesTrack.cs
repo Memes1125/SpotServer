@@ -12,7 +12,7 @@ namespace SpotifyServer.db
             return new LikesTrackApi
             {
                 Id = likesTrack.Id,
-                IdTrack = likesTrack.Id,
+                IdTrack = likesTrack.IdTrack,
                 IdUser = likesTrack.IdUser,
             };
         }
@@ -24,7 +24,7 @@ namespace SpotifyServer.db
             return new LikesTrack
             {
                 Id = likesTrack.Id,
-                IdTrack = likesTrack.Id,
+                IdTrack = likesTrack.IdTrack,
                 IdUser = likesTrack.IdUser,
             };
         }

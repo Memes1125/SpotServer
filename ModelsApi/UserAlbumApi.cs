@@ -11,7 +11,6 @@ namespace ModelsApi
         public int IdUser { get; set; }
         public int IdAlbum { get; set; }
 
-        public UserApi userId { get; set; }
-        public AlbumApi albumId { get; set; }
+        public AlbumApi Albums { get; set; }
     }
 }

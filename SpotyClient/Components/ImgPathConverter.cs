@@ -10,6 +10,10 @@ namespace SpotyClient.Components
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                value = @"\Resource\NoImage.png";
+            }
             string path = Environment.CurrentDirectory + value.ToString();
             if (!File.Exists(path))
                 path = Environment.CurrentDirectory + @"\Resource\NoImage.png";
@@ -20,7 +24,7 @@ namespace SpotyClient.Components
         {
             return null;
         }
-
+        
         private BitmapImage GetImageFromPath(string url)
         {
             BitmapImage img = new BitmapImage();

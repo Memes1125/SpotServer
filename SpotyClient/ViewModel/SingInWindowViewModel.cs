@@ -30,7 +30,6 @@ namespace SpotyClient.ViewModel
         public List<ArtistApi> artists { get; set; }
         public CustomCommand SingIn { get; set; }
         public CustomCommand Back { get; set; }
-        public ArtistApi Artist;
         public static int UsId;
         public static int ArtId;
 
@@ -85,8 +84,7 @@ namespace SpotyClient.ViewModel
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Сервера отключены");
-
+                    MessageBox.Show($"Сервера отключены {e}");
                 }
             });
 

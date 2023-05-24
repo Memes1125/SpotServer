@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    >
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:components="clr-namespace:SpotyClient.Components">
 
     <!--Зелёная кнопка в главном меню-->
     <Style TargetType="Button" x:Key="GreenButton">
@@ -453,5 +452,20 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <!--Заголовки в профиле-->
+    <Style x:Key="Lables" TargetType="Label">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+   
+
+   
+
+    <!--скролл-->
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="ScrollCustom/ScrollStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
