@@ -20,10 +20,20 @@ namespace SpotyClient.View
     /// </summary>
     public partial class EditArtistWindow : Window
     {
+        public static EditArtistWindow Window;
         public EditArtistWindow()
         {
             InitializeComponent();
             DataContext = new EditArtistWindowViewModel();
+            Window = this;
+        }
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                EditArtistWindow.Window.DragMove();
+            }
         }
     }
 }

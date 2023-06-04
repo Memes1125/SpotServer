@@ -41,7 +41,7 @@ namespace SpotifyServer.Controllers
 
             ArtistsTrakApi art = new ArtistsTrakApi();
             art.IdTrack = newTrack.Id;
-            art.IdArtist = AddTrackViewModel.UsArtist();
+            art.IdArtist = MasterArtistWindowViewModel.UsArtist();
             db.ArtistsTraks.Add((ArtistsTrak)art);
             await db.SaveChangesAsync();
 

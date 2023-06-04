@@ -36,6 +36,9 @@ namespace SpotyClient.View
             DataContext = new TestVM(album);
         }
 
-        
+        //private void Label_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    pop.IsOpen = true;
+        //}
     }
 }

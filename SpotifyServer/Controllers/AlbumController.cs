@@ -45,11 +45,11 @@ namespace SpotifyServer.Controllers
             
             UserAlbumApi usA = new UserAlbumApi();
             usA.IdAlbum = newAlbum.Id;
-            usA.IdUser = AddAlbumViewModel.Us();
+            usA.IdUser = MasterWinViewModel.Us();
             if (usA.IdUser == 0)
             {
                 AlbumsArtist albArt = new AlbumsArtist();
-                albArt.IdArtists = AddAlbumViewModel.UsArtist();
+                albArt.IdArtists = MasterArtistWindowViewModel.UsArtist();
                 albArt.IdAlbums = newAlbum.Id;
                 db.AlbumsArtists.Add(/*(AlbumsArtist)*/albArt);
                 await db.SaveChangesAsync();

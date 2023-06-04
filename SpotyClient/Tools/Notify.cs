@@ -16,5 +16,6 @@ namespace SpotyClient.Tools
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
+
     }
 }

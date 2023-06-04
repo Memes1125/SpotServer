@@ -281,7 +281,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <EventTrigger RoutedEvent="Button.MouseEnter">
+            <EventTrigger RoutedEvent="Button.Click">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard>

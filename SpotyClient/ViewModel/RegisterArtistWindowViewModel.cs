@@ -34,6 +34,7 @@ namespace SpotyClient.ViewModel
 
         public List<ArtistApi> artists { get; set; }
         public ArtistApi AddArtist { get; set; }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SaveArtist { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand Back { get; set; }
@@ -60,6 +61,15 @@ namespace SpotyClient.ViewModel
                     Image = artist.Image
                 };
             }
+
+            Exit = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
 
             SaveArtist = new CustomCommand(() =>
             {

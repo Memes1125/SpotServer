@@ -6,6 +6,9 @@
         xmlns:convert="clr-namespace:SpotyClient.Components"
         xmlns:local="clr-namespace:SpotyClient.View"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseDown="MouseDrag"
+        ResizeMode="CanResize"
         mc:Ignorable="d"
         Title="EditArtistWindow" Height="400" Width="300">
 
@@ -23,7 +26,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel DataContext="{Binding EditArtist}">
+
+        <Button Command="{Binding Exit}" Height="20" Width="20" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0 0 5 0">
+            <Image Source="/Resource/chrest.png"/>
+        </Button>
+        <StackPanel DataContext="{Binding EditArtist}" Margin="0 25 0 0">
             <Label Content="Придумайте псевдоним:" 
                    HorizontalAlignment="Center" 
                    Margin="0 5 0 0" 

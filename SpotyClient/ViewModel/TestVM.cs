@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using Enterwell.Clients.Wpf.Notifications;
+using Microsoft.VisualStudio.PlatformUI;
 using ModelsApi;
 using Prism.Commands;
 using SpotyClient.Tools;
@@ -19,19 +20,31 @@ namespace SpotyClient.ViewModel
 
         public string add = "dima614@bk.ru";
 
-        public CustomCommand button { get; set; }
-                
+        public CustomCommand Test { get; set; }
+        public INotificationMessageManager Manager { get; } = new NotificationMessageManager();
 
         public TestVM(AlbumApi album)
         {
 
-            
-            button = new CustomCommand(() =>
+
+            Test = new CustomCommand(() =>
             {
-                
+                DeleteProductNotification();
             });
         }
-        
 
+        public void DeleteProductNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#700d04")
+                .Background("#bf1a0b")
+                .HasMessage("Трек успешно добавлен в альбом")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
     }
 }

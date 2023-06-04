@@ -22,21 +22,32 @@ namespace SpotyClient.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Window;
         public MainWindow()
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel(null);
+            Window = this;
         }
         public MainWindow(UserApi user)
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel(user);
+            Window = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Test test = new();
             test.ShowDialog();
+        }
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                MainWindow.Window.DragMove();
+            }
         }
     }
 }

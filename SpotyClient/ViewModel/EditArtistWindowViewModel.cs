@@ -27,6 +27,7 @@ namespace SpotyClient.ViewModel
         }
 
         public ArtistApi EditArtist { get; set; }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand SaveArtist { get; set; }
 
@@ -41,11 +42,21 @@ namespace SpotyClient.ViewModel
                 {
                     if (window.DataContext == this)
                     {
-
                         CloseWin(window);
                     }
                 }
+                
+            });
 
+            Exit = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                    {
+                        CloseWin(window);
+                    }
+                }
             });
 
             string directory = Environment.CurrentDirectory;

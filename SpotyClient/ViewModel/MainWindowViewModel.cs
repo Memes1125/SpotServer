@@ -13,6 +13,7 @@ namespace SpotyClient.ViewModel
 {
     public class MainWindowViewModel : Notify
     {
+        public CustomCommand Exit { get; set; }
         public CustomCommand RegUser { get; set; }
         public CustomCommand RegArtist { get; set; }
         public CustomCommand SingIn { get; set; }
@@ -20,6 +21,15 @@ namespace SpotyClient.ViewModel
 
         public MainWindowViewModel(UserApi user)
         {
+            Exit = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
+
             RegUser = new CustomCommand(() =>
             {
                 RegisterUserWindow RegUserWin = new RegisterUserWindow();

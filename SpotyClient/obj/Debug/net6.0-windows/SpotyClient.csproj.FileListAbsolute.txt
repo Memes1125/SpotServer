@@ -60,7 +60,6 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\V
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackWindow.g.cs
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackWindow.baml
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\EventBinder.dll
-C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\MvvmEventBinding.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\Components\DropDownContent.g.cs
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\Components\DropDownContent.baml
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\ScrollCustom\Colors.baml
@@ -178,3 +177,18 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\t
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\zh-Hans\StreamJsonRpc.resources.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\zh-Hant\StreamJsonRpc.resources.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.0\System.Management.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\Id3.Net.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\JetBrains.Annotations.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackInAlbumWindow.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackInAlbumWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackInAlbumArtistWindow.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\AddTrackInAlbumArtistWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\RecoveryPasswordWindow.g.cs
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\obj\Debug\net6.0-windows\View\RecoveryPasswordWindow.baml
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\BouncyCastle.Cryptography.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\MailKit.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\MimeKit.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\System.Security.Cryptography.Pkcs.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\WPFTextBoxAutoComplete.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotyClient\bin\Debug\net6.0-windows\Enterwell.Clients.Wpf.Notifications.dll

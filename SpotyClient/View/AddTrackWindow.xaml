@@ -7,6 +7,9 @@
         xmlns:convert="clr-namespace:SpotyClient.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseDown="MouseDrag"
+        ResizeMode="CanResize"
         Title="AddAlbumWindow" Height="550" Width="300">
 
         <Window.Background>
@@ -27,13 +30,16 @@
             <RowDefinition  />
         </Grid.RowDefinitions>
 
+        <Button Command="{Binding Exit}" Height="20" Width="20" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0 5 5 0">
+            <Image Source="/Resource/chrest.png"/>
+        </Button>
         <StackPanel  Margin="0 15 0 0" DataContext="{Binding AddTrack}">
             <Label Content="Название трека:" 
                    HorizontalAlignment="Center" 
                    Margin="0 5 0 0" 
                    FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent"
                    />
-            <TextBox Text="{Binding Name}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="0 5 0 0" DataContext="{Binding AddTrack}">
@@ -42,7 +48,7 @@
                    Margin="0 5 0 0" 
                    FontWeight="Bold" Foreground="White" FontSize="15" Background="Transparent"
                    />
-            <TextBox Text="{Binding Duration}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
+            <TextBox Text="{Binding Duration, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0 10 0 10" Style="{StaticResource TextBoxGray}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2">
@@ -73,7 +79,7 @@
             </Grid>
         </StackPanel>
 
-        <Grid Grid.Row="4" >
+        <Grid Grid.Row="4" Margin="0 30 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />

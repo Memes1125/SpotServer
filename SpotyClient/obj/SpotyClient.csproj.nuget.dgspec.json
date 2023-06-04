@@ -40,21 +40,37 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "Enterwell.Clients.Wpf.Notifications": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            },
             "EventBinder": {
               "target": "Package",
               "version": "[2.5.2, )"
+            },
+            "ID3": {
+              "target": "Package",
+              "version": "[0.6.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
             },
             "Microsoft.VisualStudio.Utilities": {
               "target": "Package",
               "version": "[17.5.33428.366, )"
             },
-            "MvvmEventBinding": {
+            "MimeKit": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[4.0.0, )"
             },
             "Prism.Core": {
               "target": "Package",
               "version": "[8.1.97, )"
+            },
+            "WPFTextBoxAutoComplete": {
+              "target": "Package",
+              "version": "[1.0.5, )"
             }
           },
           "imports": [

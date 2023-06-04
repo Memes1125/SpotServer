@@ -28,6 +28,7 @@ namespace SpotyClient.ViewModel
 
         public List<UserApi> users { get; set; }
         public List<ArtistApi> artists { get; set; }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SingIn { get; set; }
         public CustomCommand Back { get; set; }
         public static int UsId;
@@ -67,6 +68,15 @@ namespace SpotyClient.ViewModel
                         Email = artist.Email,
                         Password = artist.Password,
                     };
+                }
+            });
+
+            Exit = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
                 }
             });
 

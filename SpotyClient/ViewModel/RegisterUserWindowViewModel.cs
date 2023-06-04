@@ -38,6 +38,7 @@ namespace SpotyClient.ViewModel
 
         public List<UserApi> users { get; set; }
         public UserApi AddUser { get; set; }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SaveUser { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand Back { get; set; }
@@ -62,7 +63,15 @@ namespace SpotyClient.ViewModel
                     Image = user.Image
                 };
             }
-            
+
+            Exit = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
 
             SaveUser = new CustomCommand(() =>
             {

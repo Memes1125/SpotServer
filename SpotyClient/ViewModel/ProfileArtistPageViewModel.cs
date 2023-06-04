@@ -1,4 +1,5 @@
-﻿using ModelsApi;
+﻿using Enterwell.Clients.Wpf.Notifications;
+using ModelsApi;
 using SpotyClient.Components;
 using SpotyClient.Tools;
 using SpotyClient.View;
@@ -32,14 +33,14 @@ namespace SpotyClient.ViewModel
                 SignalChanged();
             }
         }
-        public ArtistsTrakApi SelectedTrack 
-        { 
+        public ArtistsTrakApi SelectedTrack
+        {
             get => selectedTrack;
             set
             {
                 selectedTrack = value;
                 SignalChanged("SelectedTrack");
-            } 
+            }
         }
 
 
@@ -83,40 +84,110 @@ namespace SpotyClient.ViewModel
             }
         }
 
-        public Track PlayingTrack { get; set; }
+        public List<AlbumTrackApi> AlbumTrack 
+        { 
+            get => albumTrack;
+            set
+            {
+                albumTrack = value;
+                SignalChanged("AlbumTrack");
+            }
+        }
 
+        public Track PlayingTrack { get; set; }
+        public INotificationMessageManager Manager { get; } = new NotificationMessageManager();
+        public static Queue<TrackApi> test = new Queue<TrackApi>();
         public CustomCommand NewAlbum { get; set; }
         public ArtistApi ProfileArtist { get; set; }
         public TrackApi Track { get; set; }
         public AlbumApi Album { get; set; }
         public CustomCommand Edit { get; set; }
         public CustomCommand EditAlbum { get; set; }
+        public CustomCommand PlayAlbum { get; set; }
         public CustomCommand Play { get; set; }
+        public CustomCommand AddInAlbum { get; set; }
         public CustomCommand DeleteAlbum { get; set; }
         public CustomCommand EditTrack { get; set; }
         public CustomCommand DeleteTrack { get; set; }
         public CustomCommand AddTrack { get; set; }
+
         public MediaElement Track1;
 
         public static int IdTrackForGet;
+        private List<AlbumTrackApi> albumTrack;
 
         public ProfileArtistPageViewModel()
         {
             Task.Run(GetArtistId);
             Task.Run(GetAlbumsList);
             Task.Run(GetTaskList);
+            Task.Run(GetAlbumTrack);
 
             Play = new CustomCommand(() =>
             {
-                if (SelectedTrack == null)
-                    return;
-                foreach (var track in Traks)
+                try
                 {
-                    if (SelectedTrack.IdTrack == track.Id)
+                    if (MasterArtistWindowViewModel.listTracks != null)
+                        MasterArtistWindowViewModel.listTracks.Clear();
+
+                    if (test.Count != 0)
+                        test.Clear();
+
+                    if (SelectedTrack == null)
+                        return;
+                    foreach (var track in Traks)
                     {
-                        IdTrackForGet = track.Id;
-                        Components.Track.GetInstance().UpdateTrack(track);
+                        if (SelectedTrack.IdTrack == track.Id)
+                        {
+                            IdTrackForGet = track.Id;
+                            Components.Track.GetInstance().UpdateTrack(track);
+                        }
                     }
+                }
+                catch
+                {
+                    MessageBox.Show("Простите", "Возникла непредвиденная ошибка, обратитесь к разработчику",  MessageBoxButton.OK ,MessageBoxImage.Error);
+                }
+                
+            });
+
+            PlayAlbum = new CustomCommand(() =>
+            {
+                try
+                {
+                    test.Clear();
+                    if (SelectedAlbumsArtist == null)
+                    {
+                        MessageBox.Show("Album don't selected");
+                    }
+                    else
+                    {
+                        foreach (var al in Albums)
+                            if (SelectedAlbumsArtist.IdAlbums == al.Id)
+                                foreach (var altra in AlbumTrack)
+                                    if (al.Id == altra.IdAlbum)
+                                        foreach (var track in Traks)
+                                            if (altra.IdTrack == track.Id)
+                                                test.Enqueue(track);
+
+                        Components.Track.GetInstance().UpdateTrack(test.Peek());
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Возможно альбом пуст");
+                    ErrorNotification();
+                }
+            });
+
+            AddInAlbum = new CustomCommand(() =>
+            {
+                
+                if (SingInWindowViewModel.ArtId != 0)
+                {
+                    AddTrackInAlbumArtistWindow add = new AddTrackInAlbumArtistWindow();
+                    add.ShowDialog();
+                    AddTrackInAlbumNotification();
                 }
             });
 
@@ -124,6 +195,8 @@ namespace SpotyClient.ViewModel
             {
                 AddTrackWindow atw = new AddTrackWindow();
                 atw.ShowDialog();
+                AddTrackNotification();
+                Task.Run(GetTaskList);
             });
 
 
@@ -134,6 +207,7 @@ namespace SpotyClient.ViewModel
                 Track = SelectedTrack.Tracks;
                 AddTrackWindow edit = new AddTrackWindow(Track);
                 edit.ShowDialog();
+                EditTrackNotification();
                 Task.Run(GetTaskList);
             });
 
@@ -145,12 +219,13 @@ namespace SpotyClient.ViewModel
                     try
                     {
                         Task.Run(DeleteTrackMethod);
+                        DeleteTrackNotification();
                         Thread.Sleep(200);
                         GetTrack();
                     }
-                    catch (Exception e)
+                    catch 
                     {
-                        MessageBox.Show(e.Message);
+                        ErrorNotification();
                     }
                 }
                 else return;
@@ -160,6 +235,7 @@ namespace SpotyClient.ViewModel
             {
                 AddAlbumWindow albumWindow = new AddAlbumWindow();
                 albumWindow.Show();
+                AddAlbumNotification();
                 Task.Run(GetAlbumsList);
             });
 
@@ -170,6 +246,7 @@ namespace SpotyClient.ViewModel
                 Album = SelectedAlbumsArtist.Albums;
                 AddAlbumWindow edit = new AddAlbumWindow(Album);
                 edit.ShowDialog();
+                EditAlbumNotification();
                 Task.Run(GetAlbumsList);
             });
 
@@ -181,12 +258,13 @@ namespace SpotyClient.ViewModel
                     try
                     {
                         Task.Run(DeleteAlbumMethod);
+                        DeleteAlbumNotification();
                         Thread.Sleep(200);
                         GetAlbum();
                     }
-                    catch (Exception e)
+                    catch
                     {
-                        MessageBox.Show(e.Message);
+                        ErrorNotification();
                     }
                 }
                 else return;
@@ -196,6 +274,7 @@ namespace SpotyClient.ViewModel
             {
                 EditArtistWindow euw = new EditArtistWindow();
                 euw.ShowDialog();
+                EditArtistNotification();
                 Thread.Sleep(200);
                 Task.Run(GetArtistId);
 
@@ -285,6 +364,14 @@ namespace SpotyClient.ViewModel
             await Api.DeleteAsync<AlbumApi>(album, "Album");
         }
 
+        public async Task GetAlbumTrack()
+        {
+            var result = await Api.GetListAsync<AlbumTrackApi[]>("AlbumTrack");
+            AlbumTrack = new List<AlbumTrackApi>(result);
+            SignalChanged("AlbumTrack");
+
+        }
+
         public void GetTrack()
         {
             Task.Run(GetTaskList);
@@ -293,6 +380,125 @@ namespace SpotyClient.ViewModel
         public void GetAlbum()
         {
             Task.Run(GetAlbumsList);
+        }
+
+
+        public void AddAlbumNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#327d0b")
+                .Background("#48a818")
+                .HasMessage("Альбом успешно создан.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void AddTrackInAlbumNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#327d0b")
+                .Background("#48a818")
+                .HasMessage("Трек успешно добавлен в альбом.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void AddTrackNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#327d0b")
+                .Background("#48a818")
+                .HasMessage("Трек успешно создан.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void DeleteTrackNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#700d04")
+                .Background("#bf1a0b")
+                .HasMessage("Трек успешно удалён.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void DeleteAlbumNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#700d04")
+                .Background("#bf1a0b")
+                .HasMessage("Альбом успешно удалён.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void EditAlbumNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#b36910")
+                .Background("#b38410")
+                .HasMessage("Альбом успешно изменён.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void EditTrackNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#b36910")
+                .Background("#b38410")
+                .HasMessage("Трек успешно изменён.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void EditArtistNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#b36910")
+                .Background("#b38410")
+                .HasMessage("Профиль успешно изменён.")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
+        }
+        public void ErrorNotification()
+        {
+            Manager
+                .CreateMessage()
+                .Animates(true)
+                .AnimationInDuration(0.75)
+                .AnimationOutDuration(2)
+                .Accent("#700d04")
+                .Background("#bf1a0b")
+                .HasMessage("Непредвиденная ошибка")
+                .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
+                .Queue();
         }
     }
 }

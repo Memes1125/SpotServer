@@ -25,6 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SpotyClient\SpotyClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ModelsApi">
       <HintPath>..\ModelsApi\bin\Debug\net6.0\ModelsApi.dll</HintPath>
     </Reference>

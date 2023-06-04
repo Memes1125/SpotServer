@@ -16,6 +16,12 @@
     <Compile Update="View\AddAlbumWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\AddTrackInAlbumArtistWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\AddTrackInAlbumWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\AddTrackWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -47,6 +53,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\Pages\SearchPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\RecoveryPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\RegisterArtistWindow.xaml.cs">
@@ -102,6 +111,12 @@
     <Page Update="View\AddAlbumWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\AddTrackInAlbumArtistWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AddTrackInAlbumWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\AddTrackWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -139,6 +154,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Pages\SearchPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\RecoveryPasswordWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\RegisterArtistWindow.xaml">

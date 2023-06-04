@@ -33,6 +33,7 @@ namespace SpotyClient.ViewModel
         public List<AlbumsArtistApi> albumsArtist { get; set; }
         public AlbumApi AddAlbum { get; set; }
         public CustomCommand Back { get; set;  }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand SaveAlbum { get; set; }
         public UserApi UserId
@@ -48,15 +49,8 @@ namespace SpotyClient.ViewModel
 
         public AddAlbumViewModel(AlbumApi album)
         {
-
-            if (SingInWindowViewModel.UsId != 0 || SingInWindowViewModel.ArtId != 0)
-            {
-                //Task.Run(GetListAlbums);
-                FailUser();
-                //Task.Run(GetListArtistAlbums);
-                FailArtist();
-            }
-            
+            Task.Run(GetListAlbums);
+            Task.Run(GetListArtistAlbums);
 
             if (album == null)
             {
@@ -81,9 +75,17 @@ namespace SpotyClient.ViewModel
                 }
             });
 
+            Exit = new CustomCommand(()=>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
+
             SaveAlbum = new CustomCommand(() =>
             {
-
                 if (AddAlbum.Id == 0)
                 {
                     try
@@ -103,7 +105,6 @@ namespace SpotyClient.ViewModel
                     {
                         MessageBox.Show("Код ошибки: Value Error; \nПроверьте заполненность данных!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    
                 }
                 else
                 {
@@ -171,53 +172,10 @@ namespace SpotyClient.ViewModel
             await Api.PostAsync<AlbumApi>(AddAlbum, "Album");
         }
 
-        #region Костыль для Юзера
-        static string pathUser = "D:\\HiddenFolder\\User.txt";
-        static string path = "D:\\HiddenFolder";
-        public static int Us()
-        {
-            
-            int result;
-            string str = File.ReadAllText(pathUser);
-            result = Convert.ToInt32(str);
-            return result;
-        }
+        
 
 
-        public void FailUser()
-        {
-            if (!Directory.Exists(path))
-            {
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            }
-            var t = SingInWindowViewModel.UsId;
-            File.WriteAllText(pathUser, t.ToString());
-        }
-        #endregion
-
-        #region Костыль для Артиста
-        static string pathArtist = "D:\\HiddenFolder\\Artist.txt";
-        public static int UsArtist()
-        {
-            
-            int result;
-            string str = File.ReadAllText(pathArtist);
-            result = Convert.ToInt32(str);
-            return result;
-        }
-
-        public void FailArtist()
-        {
-            if (!Directory.Exists(path))
-            {
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            }
-            var t = SingInWindowViewModel.ArtId;
-            File.WriteAllText(pathArtist, t.ToString());
-        }
-        #endregion
+       
 
 
         public async Task GetListAlbums()

@@ -22,6 +22,7 @@ namespace SpotyClient.View
     /// </summary>
     public partial class MasterWindow : Window
     {
+        public static MasterWindow Window;
         DispatcherTimer timer = new DispatcherTimer();
         public MasterWindow()
         {
@@ -29,6 +30,7 @@ namespace SpotyClient.View
             DataContext = new MasterWinViewModel(Dispatcher);
             timer.Interval = TimeSpan.FromSeconds(0.1);
             timer.Tick += timer_tick;
+            Window = this;
         }
 
         private void timer_tick(object sender, EventArgs e)
@@ -39,63 +41,90 @@ namespace SpotyClient.View
 
         private void slider2_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            media1.Pause();
-            media1.Position = TimeSpan.FromSeconds(slider2.Value);
-            media1.Play();
+            try
+            {
+                media1.Pause();
+                media1.Position = TimeSpan.FromSeconds(slider2.Value);
+                media1.Play();
+            }
+            catch { }
+            
         }
 
         private void slider1_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (media1 != null)
+            try
             {
-                media1.Volume = slider1.Value;
+                if (media1 != null)
+                {
+                    media1.Volume = slider1.Value;
+                }
             }
+            catch { }
+            
         }
 
         private void media1_MediaOpened(object sender, RoutedEventArgs e)
         {
-            slider2.Maximum = media1.NaturalDuration.TimeSpan.TotalSeconds;
-            sliderback2.Maximum = media1.NaturalDuration.TimeSpan.TotalSeconds;
+            try
+            {
+                slider2.Maximum = media1.NaturalDuration.TimeSpan.TotalSeconds;
+                sliderback2.Maximum = media1.NaturalDuration.TimeSpan.TotalSeconds;
+            }
+            catch { }
         }
         public bool check;
         private void playButton_Click(object sender, RoutedEventArgs e)
         {
-            if (media1.CanPause == false)
+            try
             {
-                media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
-                media1.Play();
-                timer.Start();
-                check = true;
-            }
-            else
-            {
-                Uri uri = new Uri(Track.resultPath, UriKind.Absolute);
-                if (check == true)
+                if (media1.CanPause == false)
                 {
-                    media1.Pause();
-                    timer.Stop();
-                    check = false;
-                    if (media1.Source != uri)
-                    {
-                        media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
-                        media1.Play();
-                        timer.Start();
-                        check = true;
-                    }
-                }
-                else if (check == false)
-                {
+                    media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
                     media1.Play();
                     timer.Start();
                     check = true;
-                    if (media1.Source != uri)
+                }
+                else
+                {
+                    Uri uri = new Uri(Track.resultPath, UriKind.Absolute);
+                    if (check == true)
                     {
-                        media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
+                        media1.Pause();
+                        timer.Stop();
+                        check = false;
+                        if (media1.Source != uri)
+                        {
+                            media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
+                            media1.Play();
+                            timer.Start();
+                            check = true;
+                        }
+                    }
+                    else if (check == false)
+                    {
                         media1.Play();
                         timer.Start();
                         check = true;
+                        if (media1.Source != uri)
+                        {
+                            media1.Source = new Uri(Track.resultPath, UriKind.Absolute);
+                            media1.Play();
+                            timer.Start();
+                            check = true;
+                        }
                     }
                 }
+            }
+            catch { }
+            
+        }
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if(Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                MasterWindow.Window.DragMove();
             }
         }
     }

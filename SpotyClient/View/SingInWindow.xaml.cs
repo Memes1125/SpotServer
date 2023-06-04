@@ -31,18 +31,27 @@ namespace SpotyClient.View
                 entry = value;
             }
         }
-
+        public static SingInWindow Window;
         public SingInWindow()
         {
             InitializeComponent();
             DataContext = new SingInWindowViewModel(null, null);
+            Window = this;
         }
 
         public SingInWindow(UserApi user, ArtistApi artist)
         {
             InitializeComponent();
             DataContext = new SingInWindowViewModel(user, artist);
-            
+            Window = this;
+        }
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                SingInWindow.Window.DragMove();
+            }
         }
     }
 }

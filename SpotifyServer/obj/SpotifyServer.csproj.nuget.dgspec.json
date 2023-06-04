@@ -27,7 +27,11 @@
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\SpotyClient.csproj": {
+                "projectPath": "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\SpotyClient.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -81,6 +85,97 @@
             },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\SpotyClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\SpotyClient.csproj",
+        "projectName": "SpotyClient",
+        "projectPath": "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\SpotyClient.csproj",
+        "packagesPath": "C:\\Users\\pokim\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pokim\\source\\repos\\SpotifyServer\\SpotyClient\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\pokim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0-windows7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0-windows7.0": {
+            "targetAlias": "net6.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Enterwell.Clients.Wpf.Notifications": {
+              "target": "Package",
+              "version": "[1.4.2, )"
+            },
+            "EventBinder": {
+              "target": "Package",
+              "version": "[2.5.2, )"
+            },
+            "ID3": {
+              "target": "Package",
+              "version": "[0.6.0, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Microsoft.VisualStudio.Utilities": {
+              "target": "Package",
+              "version": "[17.5.33428.366, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "Prism.Core": {
+              "target": "Package",
+              "version": "[8.1.97, )"
+            },
+            "WPFTextBoxAutoComplete": {
+              "target": "Package",
+              "version": "[1.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"

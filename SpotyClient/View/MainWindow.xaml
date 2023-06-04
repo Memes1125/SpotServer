@@ -4,6 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotyClient"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseDown="MouseDrag"
+        ResizeMode="CanResize"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" MinHeight="450" MinWidth="300" MaxHeight="450" MaxWidth="300">
@@ -17,10 +20,13 @@
             <RowDefinition Height="130"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+        <Button Command="{Binding Exit}" Height="20" Width="20" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0 5 5 0">
+            <Image Source="/Resource/chrest.png"/>
+        </Button>
         <StackPanel >
-            <Image Source="../Resource/logo24.png" Height="50" HorizontalAlignment="Center" Margin="0 25 0 0" /> <!--Приблизится к стилю спотика-->
+            <Image Source="/Resource/MEMEFY.png" Height="50" HorizontalAlignment="Center" Margin="0 25 0 0" /> <!--Приблизится к стилю спотика-->
             <Label Content="Миллионы треков" HorizontalAlignment="Center" Margin="0 70 0 0" FontSize="20" FontWeight="Bold" Foreground="White"/> <!--Приблизится к стилю спотика-->
-            <Label Content="В Memify." HorizontalAlignment="Center" Margin="0 5 0 0" FontSize="20" FontWeight="Bold" Foreground="White"/> <!--Приблизится к стилю спотика-->
+            <Label Content="В Memefy." HorizontalAlignment="Center" Margin="0 5 0 0" FontSize="20" FontWeight="Bold" Foreground="White"/> <!--Приблизится к стилю спотика-->
         </StackPanel>
 
         <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="0 0 0 80">
@@ -32,7 +38,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="0 10 0 10">
             <Button Content="Войти" Command="{Binding SingIn}" Style="{StaticResource MenuButton}"/> <!--Приблизится к стилю спотика-->
-            <Button Click="Button_Click" Content=""/>
+            <Button Height="15" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -3,14 +3,22 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SpotyClient.View.Pages"
+      xmlns:controls="clr-namespace:Enterwell.Clients.Wpf.Notifications.Controls;assembly=Enterwell.Clients.Wpf.Notifications"
+      xmlns:local="clr-namespace:SpotyClient.View.Pages" xmlns:convert="clr-namespace:SpotyClient.Components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainPage">
 
     <Page.Background>
         <ImageBrush ImageSource="/Resource/bgvs.png"/>
+        
     </Page.Background>
+    <Page.Resources>
+        <convert:ImgPathConverter x:Key="pathConverter"/>
+        <ItemsPanelTemplate x:Key="listPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,15 +27,36 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <controls:NotificationMessageContainer Manager="{Binding Manager}" Grid.Column="1" Height="75" Width="220" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
-            <Label Content="Исполнители" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
-            <ListBox Grid.Row="1" Background="Transparent">
-                
+            
+            <Label Content="Исполнители" HorizontalAlignment="Center" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
+            <ListBox Grid.Row="1" 
+                             Background="Transparent"
+                             ItemsSource="{Binding Artists}" 
+                             ItemsPanel="{StaticResource listPanelTemplate}" 
+                             SelectedItem="{Binding SelectedArtist}"
+                             Style="{StaticResource ListAlbums}"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"> 
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="20">
+                            <Border BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+                            <Label Content="{Binding Name}" Foreground="White"  FontSize="15" FontWeight="Bold"  HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
         <Grid Grid.Row="1">
@@ -36,9 +65,38 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Content="Треки" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
-            <ListBox Grid.Row="1" Background="Transparent">
-
+            <Label Content="Треки" HorizontalAlignment="Center" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
+            <ListBox Grid.Row="1" 
+                             Background="Transparent"
+                             ItemsSource="{Binding Tracks}" 
+                             ItemsPanel="{StaticResource listPanelTemplate}" 
+                             SelectedItem="{Binding SelectedTrack}"
+                             Style="{StaticResource ListAlbums}"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
+                             >
+                <!--ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"-->
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="20">
+                            <Border  BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+                            <Label Content="{Binding Name}" Foreground="White"  FontSize="15" FontWeight="Bold"  HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu Background="DarkGray">
+                        <MenuItem Header="Добавить в любимое" Command="{Binding AddLikesTrackCommand}"/>
+                        <MenuItem Header="добавить в альбом" Command="{Binding AddInAlbum}"/>
+                        <MenuItem Header="Играть" Command="{Binding Play}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
         </Grid>
 
@@ -48,10 +106,39 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Content="Альбомы" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
-            <ListBox Grid.Row="1" Background="Transparent">
-
+            <Label Content="Альбомы" HorizontalAlignment="Center" Style="{StaticResource Lables}" Foreground="White" Margin="10 5 0 0"/>
+            <ListBox Grid.Row="1" 
+                             Background="Transparent"
+                             ItemsSource="{Binding Albums}" 
+                             ItemsPanel="{StaticResource listPanelTemplate}" 
+                             SelectedItem="{Binding SelectedAlbum}"
+                             Style="{StaticResource ListAlbums}"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"
+                             >
+                <!--ItemContainerStyle="{DynamicResource _ListBoxItemStyle}"-->
+                <ListBox.ItemTemplate >
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical" Margin="20">
+                            <Border  BorderBrush="#FF000000" BorderThickness="5 5 5 5" CornerRadius="150,150,150,150">
+                                <Image Source="{Binding Image, Converter={StaticResource pathConverter}}" Width="150" Height="150"  HorizontalAlignment="Center" Stretch="UniformToFill">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="75 75" RadiusX="75" RadiusY="75"/>
+                                    </Image.Clip>
+                                </Image>
+                            </Border>
+                            <Label Content="{Binding Name}" Foreground="White"  FontSize="15" FontWeight="Bold"  HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ContextMenu>
+                    <ContextMenu Background="DarkGray">
+                        <MenuItem Header="Добавить в любимое" Command="{Binding AddLikesAlbumCommand}"/>
+                        <MenuItem Header="Слушать альбом" Command="{Binding PlayAlbum}"/>
+                    </ContextMenu>
+                </ListBox.ContextMenu>
             </ListBox>
         </Grid>
+            
     </Grid>
 </Page>

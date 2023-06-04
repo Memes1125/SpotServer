@@ -21,16 +21,27 @@ namespace SpotyClient.View
     /// </summary>
     public partial class AddTrackWindow : Window
     {
+        public static AddTrackWindow Window;
         public AddTrackWindow()
         {
             InitializeComponent();
             DataContext = new AddTrackViewModel(null);
+            Window = this;
         }
 
         public AddTrackWindow(TrackApi track)
         {
             InitializeComponent();
             DataContext = new AddTrackViewModel(track);
+            Window = this;
+        }
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddTrackWindow.Window.DragMove();
+            }
         }
     }
 }

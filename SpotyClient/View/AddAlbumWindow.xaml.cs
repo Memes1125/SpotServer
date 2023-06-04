@@ -21,16 +21,26 @@ namespace SpotyClient.View
     /// </summary>
     public partial class AddAlbumWindow : Window
     {
+        public static AddAlbumWindow Window;
         public AddAlbumWindow()
         {
             InitializeComponent();
             DataContext = new AddAlbumViewModel(null);
+            Window = this;
         }
         public AddAlbumWindow(AlbumApi album)
         {
             InitializeComponent();
             DataContext = new AddAlbumViewModel(album);
+            Window = this;
         }
-        
+
+        private void MouseDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddAlbumWindow.Window.DragMove();
+            }
+        }
     }
 }

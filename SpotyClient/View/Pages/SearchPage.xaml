@@ -4,12 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SpotyClient.View.Pages"
+      xmlns:controls="clr-namespace:Enterwell.Clients.Wpf.Notifications.Controls;assembly=Enterwell.Clients.Wpf.Notifications"
+      xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
       xmlns:convert="clr-namespace:SpotyClient.Components"
       mc:Ignorable="d" 
       d:DesignHeight="475" d:DesignWidth="890"
       Title="SearchPage">
-
-
 
     <Page.Background>
         <ImageBrush ImageSource="/Resource/bgvs.png"/>
@@ -32,11 +32,26 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <controls:NotificationMessageContainer Manager="{Binding Manager}" Grid.Column="1" Height="75" Width="220" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Label Height="50" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" FontSize="30" Content="Поиск" Style="{StaticResource Lables}" Foreground="White"/>
         <Label Height="25" Grid.Row="1" VerticalAlignment="Top" Margin="5 0 5 0" Content="Поиск трека" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Style="{StaticResource Lables}" FontSize="11" Foreground="Beige"/>
         <Label Height="25" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="5 0 5 0" Content="Поиск альбома" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Style="{StaticResource Lables}" FontSize="11" Foreground="Beige"/>
-        <TextBox Text="{Binding SearchTrack, UpdateSourceTrigger=PropertyChanged}" Margin="10 25 0 10" Style="{StaticResource TextBoxGray}" HorizontalContentAlignment="Center" Grid.Row="1"/>
-        <TextBox Text="{Binding SearchAlbum, UpdateSourceTrigger=PropertyChanged}" Margin="10 25 0 10" Style="{StaticResource TextBoxGray}" HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="2"/>
+        <TextBox
+            Text="{Binding SearchTrack, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10 25 0 10"
+            Style="{StaticResource TextBoxGray}" 
+            HorizontalContentAlignment="Center"
+            Grid.Row="1"
+            behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding TracksItems}"
+            />
+        <TextBox
+            Text="{Binding SearchAlbum, UpdateSourceTrigger=PropertyChanged}"
+            Margin="10 25 0 10"
+            Style="{StaticResource TextBoxGray}"
+            HorizontalContentAlignment="Center"
+            Grid.Row="1" Grid.Column="2"
+            behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding AlbumsItems}"
+            />
         
         <ListBox ItemsSource="{Binding Traks}" 
                  SelectedItem="{Binding SelectedTrak}" 
@@ -63,7 +78,7 @@
             </ListBox.ItemTemplate>
             <ListBox.ContextMenu>
                 <ContextMenu Background="DarkGray">
-                    <MenuItem Header="Играть" Command="{Binding Play}"/>
+                    <MenuItem Header="Слушать" Command="{Binding Play}"/>
                     <MenuItem Header="Добавить в Альбом" Command="{Binding AddInAlbum}"/>
                     <MenuItem Header="Добавить в Любимое" Command="{Binding AddLikes}"/>
                 </ContextMenu>
@@ -94,8 +109,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Удалить" Command="{Binding DeleteAlbum}"/>
+                <ContextMenu Background="DarkGray">
+                    <MenuItem Header="Слушать альбом" Command="{Binding PlayAlbum}"/>
                     <MenuItem Header="Добавить в Любимое" Command="{Binding AddLikesAlbumCommand}"/>
                 </ContextMenu>
             </ListBox.ContextMenu>

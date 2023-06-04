@@ -19,6 +19,8 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">C:\Users\pokim\.nuget\packages\microsoft.extensions.apidescription.server\3.0.0</PkgMicrosoft_Extensions_ApiDescription_Server>
+    <PkgMicrosoft_VisualStudio_Threading_Analyzers Condition=" '$(PkgMicrosoft_VisualStudio_Threading_Analyzers)' == '' ">C:\Users\pokim\.nuget\packages\microsoft.visualstudio.threading.analyzers\17.1.46</PkgMicrosoft_VisualStudio_Threading_Analyzers>
+    <PkgMicrosoft_ServiceHub_Analyzers Condition=" '$(PkgMicrosoft_ServiceHub_Analyzers)' == '' ">C:\Users\pokim\.nuget\packages\microsoft.servicehub.analyzers\4.1.3102</PkgMicrosoft_ServiceHub_Analyzers>
     <PkgMicrosoft_EntityFrameworkCore_Tools Condition=" '$(PkgMicrosoft_EntityFrameworkCore_Tools)' == '' ">C:\Users\pokim\.nuget\packages\microsoft.entityframeworkcore.tools\5.0.14</PkgMicrosoft_EntityFrameworkCore_Tools>
   </PropertyGroup>
 </Project>

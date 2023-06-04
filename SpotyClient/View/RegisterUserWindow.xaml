@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotyClient.View" 
         xmlns:components="clr-namespace:SpotyClient.Components"
+        WindowStyle="None" AllowsTransparency="True"
+        MouseDown="MouseDrag"
+        ResizeMode="CanResize"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="RegisterUserWindow" Height="670" Width="300">
@@ -23,7 +26,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-
+        <Button Command="{Binding Exit}" Height="20" Width="20" VerticalAlignment="Top" Background="Transparent" BorderThickness="0" HorizontalAlignment="Right" Margin="0 0 5 0">
+            <Image Source="/Resource/chrest.png"/>
+        </Button>
         <!--Псевдоним-->
         <StackPanel Grid.Row="1" Margin="0 15 0 0" DataContext="{Binding AddUser}">
             <Label Content="Придумайте псевдоним:" 

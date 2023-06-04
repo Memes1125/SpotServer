@@ -1,6 +1,8 @@
-﻿using Microsoft.Win32;
+﻿using Id3;
+using Microsoft.Win32;
 using ModelsApi;
 using SpotyClient.Tools;
+using SpotyClient.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,8 +31,8 @@ namespace SpotyClient.ViewModel
         }
         private MediaElement track1;
         public MediaElement Track1
-        { 
-            get => track1; 
+        {
+            get => track1;
             set
             {
                 track1 = value;
@@ -39,20 +41,25 @@ namespace SpotyClient.ViewModel
         }
 
         public List<ArtistsTrakApi> tracks { get; set; }
-        public TrackApi AddTrack { get; set; }
+        private TrackApi addTrack;
+        public TrackApi AddTrack
+        { 
+            get => addTrack;
+            set
+            {
+                addTrack = value;
+                SignalChanged(nameof(AddTrack));
+            }
+        }
         public CustomCommand Back { get; set; }
+        public CustomCommand Exit { get; set; }
         public CustomCommand SaveTrack { get; set; }
         public CustomCommand SelectImage { get; set; }
         public CustomCommand SelectTrack { get; set; }
 
         public AddTrackViewModel(TrackApi track)
         {
-
-            if (SingInWindowViewModel.ArtId != 0)
-            {
-                Task.Run(GetListTracks);
-                FailArtist();
-            }
+            Task.Run(GetListTracks);
 
             if (track == null)
             {
@@ -71,6 +78,15 @@ namespace SpotyClient.ViewModel
             }
 
             Back = new CustomCommand(() =>
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.DataContext == this)
+                        CloseWin(window);
+                }
+            });
+
+            Exit = new CustomCommand(() =>
             {
                 foreach (Window window in Application.Current.Windows)
                 {
@@ -122,6 +138,7 @@ namespace SpotyClient.ViewModel
             SelectImage = new CustomCommand(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (ofd.ShowDialog() == true)
                 {
                     try
@@ -144,6 +161,7 @@ namespace SpotyClient.ViewModel
             SelectTrack = new CustomCommand(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "MP3 files (*.mp3)|*.mp3";
                 if (ofd.ShowDialog() == true)
                 {
                     try
@@ -152,15 +170,37 @@ namespace SpotyClient.ViewModel
                         Track1 = GetTrackFromPath(ofd.FileName);
                         AddTrack.Track1 = $"/Resource/{info.Name}";
                         var newPath = directory.Substring(0, directory.Length) + AddTrack.Track1;
+
                         if (!File.Exists(newPath))
                             File.Copy(ofd.FileName, newPath, true);
+
+                        using var mp3 = new Mp3(newPath);
+                        Id3Tag tag = new Id3Tag();
+                        tag = mp3.GetTag(Id3TagFamily.Version2X);
+                        AddTrack.Duration = mp3.Audio.Duration;
+                        AddTrack.Name = ofd.SafeFileName.ToString();
+
+                        if (AddTrack != null)
+                        {
+                            AddTrackWindow addwin = new AddTrackWindow(AddTrack);
+                            addwin.Show();
+                            foreach (Window window in Application.Current.Windows)
+                            {
+                                if (window.DataContext == this)
+                                    CloseWin(window);
+                            }
+                        }
+                        
+
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Код ошибки: File Error", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show($"Код ошибки: File Error {ex}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                
             });
+
         }
 
         private MediaElement GetTrackFromPath(string url)
@@ -189,30 +229,29 @@ namespace SpotyClient.ViewModel
             win.Close();
         }
 
-        #region Костыль для Артиста
-        static string path = "D:\\HiddenFolder";
-        static string path2 = "D:\\HiddenFolder\\Artist.txt";
+        //#region Костыль для Артиста
+        //static string path = "c:\\HiddenFolder";
+        //static string path2 = "c:\\HiddenFolder\\Artist.txt";
         
 
-        public static int UsArtist()
-        {
-            if (!Directory.Exists(path))
-            {
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            }
-            int result;
-            string str = File.ReadAllText(path2);
-            result = Convert.ToInt32(str);
-            return result;
-        }
+        //public static int UsArtist()
+        //{
+        //    if (!Directory.Exists(path))
+        //    {
+        //        DirectoryInfo di = Directory.CreateDirectory(path);
+        //    }
+        //    int result;
+        //    string str = File.ReadAllText(path2);
+        //    result = Convert.ToInt32(str);
+        //    return result;
+        //}
 
-        public void FailArtist()
-        {
-            var t = SingInWindowViewModel.ArtId;
-            File.WriteAllText(path2, t.ToString());
-        }
-        #endregion
+        //public void FailArtist()
+        //{
+        //    var t = SingInWindowViewModel.ArtId;
+        //    File.WriteAllText(path2, t.ToString());
+        //}
+        //#endregion
 
         public async Task EditTracks()
         {
@@ -230,5 +269,7 @@ namespace SpotyClient.ViewModel
             tracks = new List<ArtistsTrakApi>(result);
             SignalChanged("tracks");
         }
+
+       
     }
 }

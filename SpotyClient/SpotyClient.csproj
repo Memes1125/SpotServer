@@ -19,18 +19,21 @@
     <None Remove="Resource\back.png" />
     <None Remove="Resource\bgvs.png" />
     <None Remove="Resource\books.png" />
+    <None Remove="Resource\chrest.png" />
     <None Remove="Resource\green-heart.png" />
     <None Remove="Resource\heart.png" />
     <None Remove="Resource\home1.png" />
     <None Remove="Resource\IMG_20210413_180100_224.jpg" />
     <None Remove="Resource\logo24.png" />
     <None Remove="Resource\magnifier.png" />
+    <None Remove="Resource\MEMEFY.png" />
     <None Remove="Resource\next.png" />
     <None Remove="Resource\NoImage.png" />
     <None Remove="Resource\question.png" />
     <None Remove="Resource\sounds.png" />
     <None Remove="Resource\start.png" />
     <None Remove="Resource\stop.png" />
+    <None Remove="Resource\vyhod.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,12 +46,18 @@
     <Resource Include="Resource\back.png" />
     <Resource Include="Resource\bgvs.png" />
     <Resource Include="Resource\books.png" />
+    <Resource Include="Resource\chrest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resource\green-heart.png" />
     <Resource Include="Resource\heart.png" />
     <Resource Include="Resource\home1.png" />
     <Resource Include="Resource\IMG_20210413_180100_224.jpg" />
     <Resource Include="Resource\logo24.png" />
     <Resource Include="Resource\magnifier.png" />
+    <Resource Include="Resource\MEMEFY.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resource\next.png" />
     <Resource Include="Resource\NoImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -57,6 +66,9 @@
     <Resource Include="Resource\sounds.png" />
     <Resource Include="Resource\start.png" />
     <Resource Include="Resource\stop.png" />
+    <Resource Include="Resource\vyhod.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -65,10 +77,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Enterwell.Clients.Wpf.Notifications" Version="1.4.2" />
     <PackageReference Include="EventBinder" Version="2.5.2" />
+    <PackageReference Include="ID3" Version="0.6.0" />
+    <PackageReference Include="MailKit" Version="4.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Utilities" Version="17.5.33428.366" />
-    <PackageReference Include="MvvmEventBinding" Version="1.0.0" />
+    <PackageReference Include="MimeKit" Version="4.0.0" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
+    <PackageReference Include="WPFTextBoxAutoComplete" Version="1.0.5" />
   </ItemGroup>
 
 </Project>
