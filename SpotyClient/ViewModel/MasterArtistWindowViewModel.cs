@@ -78,10 +78,7 @@ namespace SpotyClient.ViewModel
 
         public MasterArtistWindowViewModel(Dispatcher dispatcher)
         {
-            if (SingInWindowViewModel.ArtId != 0)
-            {
-                FailArtist();
-            }
+            
 
             SingOut = new CustomCommand(() =>
             {
@@ -198,6 +195,11 @@ namespace SpotyClient.ViewModel
             SignalChanged("ProfileArtist");
 
             dispatcher.Invoke(() => Profile.Execute(null));
+
+            if (SingInWindowViewModel.ArtId != 0)
+            {
+                FailArtist();
+            }
         }
 
         public async Task GetTrackId()

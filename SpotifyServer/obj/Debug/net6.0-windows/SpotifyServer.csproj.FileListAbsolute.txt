@@ -175,3 +175,4 @@ C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0-windows
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0-windows\zh-Hant\StreamJsonRpc.resources.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.0\System.Management.dll
 C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\pokim\source\repos\SpotifyServer\SpotifyServer\bin\Debug\net6.0-windows\Enterwell.Clients.Wpf.Notifications.dll

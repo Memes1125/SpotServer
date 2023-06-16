@@ -94,7 +94,7 @@ namespace SpotyClient.ViewModel
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Сервера отключены {e}");
+                    MessageBox.Show($"Сервера отключены");
                 }
             });
 

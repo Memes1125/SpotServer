@@ -117,6 +117,7 @@ namespace SpotyClient.ViewModel
             SelectImage = new CustomCommand(() =>
             {
                 OpenFileDialog ofd = new OpenFileDialog();
+                ofd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                 if (ofd.ShowDialog() == true)
                 {
                     try

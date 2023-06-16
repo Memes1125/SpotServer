@@ -294,5 +294,8 @@ namespace SpotyClient.ViewModel
                 .Dismiss().WithDelay(TimeSpan.FromSeconds(5))
                 .Queue();
         }
+
+
+       
     }
 }

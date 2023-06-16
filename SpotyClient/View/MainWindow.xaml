@@ -38,7 +38,6 @@
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" Margin="0 10 0 10">
             <Button Content="Войти" Command="{Binding SingIn}" Style="{StaticResource MenuButton}"/> <!--Приблизится к стилю спотика-->
-            <Button Height="15" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

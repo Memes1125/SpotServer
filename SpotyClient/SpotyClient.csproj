@@ -20,6 +20,7 @@
     <None Remove="Resource\bgvs.png" />
     <None Remove="Resource\books.png" />
     <None Remove="Resource\chrest.png" />
+    <None Remove="Resource\github.png" />
     <None Remove="Resource\green-heart.png" />
     <None Remove="Resource\heart.png" />
     <None Remove="Resource\home1.png" />
@@ -33,6 +34,8 @@
     <None Remove="Resource\sounds.png" />
     <None Remove="Resource\start.png" />
     <None Remove="Resource\stop.png" />
+    <None Remove="Resource\tg.png" />
+    <None Remove="Resource\vk.png" />
     <None Remove="Resource\vyhod.png" />
   </ItemGroup>
 
@@ -47,6 +50,9 @@
     <Resource Include="Resource\bgvs.png" />
     <Resource Include="Resource\books.png" />
     <Resource Include="Resource\chrest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\github.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resource\green-heart.png" />
@@ -66,6 +72,12 @@
     <Resource Include="Resource\sounds.png" />
     <Resource Include="Resource\start.png" />
     <Resource Include="Resource\stop.png" />
+    <Resource Include="Resource\tg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\vk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resource\vyhod.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

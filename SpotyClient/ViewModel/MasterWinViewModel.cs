@@ -78,10 +78,7 @@ namespace SpotyClient.ViewModel
         public MasterWinViewModel(Dispatcher dispatcher)
         {
 
-            if (SingInWindowViewModel.UsId != 0)
-            {
-                FailUser();
-            }
+            
 
             Test = new CustomCommand(() =>
             {
@@ -197,6 +194,11 @@ namespace SpotyClient.ViewModel
             SignalChanged("ProfileUser");
 
             dispatcher.Invoke(() => Profile.Execute(null));
+
+            if (SingInWindowViewModel.UsId != 0)
+            {
+                FailUser();
+            }
         }
 
         #region Костыль для Юзера

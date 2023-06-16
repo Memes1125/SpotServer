@@ -185,7 +185,7 @@ namespace SpotyClient.ViewModel
                 
                 if (SingInWindowViewModel.ArtId != 0)
                 {
-                    AddTrackInAlbumArtistWindow add = new AddTrackInAlbumArtistWindow();
+                    AddTrackInAlbumArtistWindow add = new AddTrackInAlbumArtistWindow(SelectedTrack.Tracks);
                     add.ShowDialog();
                     AddTrackInAlbumNotification();
                 }
